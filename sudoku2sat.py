@@ -3,7 +3,7 @@
 # January 10, 2013
 
 from __future__ import print_function
-import sys
+import sys, math
 
 #numbers = [1,2,3,4,5,6,7,8,9]
 
@@ -12,6 +12,7 @@ def load_board(name):
     try:
         f = open(name, 'r')
         data = f.readlines()
+
         #If the board is inputed with spaces between numbers (for general form)
         if ' ' in data[0]:
             print("Format 2")
@@ -77,9 +78,19 @@ def main():
     output_board = sys.argv[2]
 
     board = load_board(input_board)
-    m = len(board[0]) / 3
-    n = pow(m, 6)
+    m = int(math.sqrt(len(board[0])))   #Size of each subsquare
+    n = pow(m, 2)                   #Max number used [1...n]
+    cells = pow(m, 4)               #Total number of cells
+    total = pow(m, 6)               #Total number of variables
     print(board, m, n)
+
+    #List of lists for all holds all the atoms for each cell
+    #eg. [[1,2...9],[10,11...18], ... [721,722...729]]
+    squares_possible_colours = [[x+(y*n)+1 for x in xrange(n)] for y in xrange(cells)]
+
+    print(squares_possible_colours)
+
+    #squares_have_colours = [x+y for x in [1,2,3] for y in [3,4,5]] 
 
     #Generate Formulas for Each square has value (C111 or C112 or ... or C11N)
     #Number % sqr(m) == n value
