@@ -1,6 +1,6 @@
-# Sedoku Puzzle Solver
+# Sedoku Puzzle to SAT converter
 # By Peter Zenger
-# January 10, 2013
+# January 25, 2013
 
 from __future__ import print_function
 import sys, math
