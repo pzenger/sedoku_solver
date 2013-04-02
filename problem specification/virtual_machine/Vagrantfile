@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # options are documented and commented below. For a complete reference,
+  # please see the online documentation at vagrantup.com.
+
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "precise64"
+
+ 
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+
+
+
+  #config.vm.forward_port 80, 8080
+  #config.vm.forward_port 8000, 8000
+
+  config.vm.share_folder "enf", "/home/vagrant/enf", "../enf"
+
+  
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "apt"
+  end
+
+end

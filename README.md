@@ -1,13 +1,16 @@
 By: Peter Zenger
+For CMPT417
 
-To use: 
-Create a file to contain the initial board.
-For each empty spot place a 0, for each filled spot place the number.
-Fill the file with 9x9 characters.
-Edit the file_name variable in the __main__ method to match the file name.
-Run the program.
-Solution will be in[you're file_name].sol
+Transformation to SAT >> /sat/
+------------------------------
+Transforms a sudoku board into a cnf formula
 
-*Not thoroughly tested, may not work on all boards.
+Direct Solution >> /direct/
+---------------------------
+Directly solves a sudoku board
 
-Enjoy.
+Problem Specification >> /problem specification/
+------------------------------------------------
+Solves through using the problem specification system Enfragmo
+
+
