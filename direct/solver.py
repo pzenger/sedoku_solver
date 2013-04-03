@@ -40,13 +40,16 @@ class Value():
             contradiction = True
             print("CONTRADICTION")
 
-    def set_value(self, value):
-        if not self.propagated:
-            print("ADING TO PROPOGATE, value: ", value)
+    def set_value(self, value=-1):
+        #if not self.propagated:
+            #print("ADING TO PROPOGATE, value: ", value)
+        if value == -1:
+            self.value = self.possible_values[0]
+        else:
             self.value = int(value)
             self.possible_values = [self.value] #added
-            to_propagate.append(self)
-            self.propagated = True
+            #to_propagate.append(self)
+        self.propagated = True
 
     def setup(self, row, column):
         self.row = row
@@ -115,9 +118,9 @@ def init_board(name):
 
 
 def setup_values(board):
-    for x in range(n):
-        for y in range(n):
-            board[x][y].setup(x, y)
+    for row in range(n):
+        for col in range(n):
+            board[row][col].setup(row, col)
 
 
 def compute_square(row, column):
@@ -198,42 +201,52 @@ def main():
 
     solved = False
     while (not contradiction and not solved):
-        rounds = 0
-        while(rounds < 2 ):
-            while (len(to_propagate) > 0):
-                propagate(to_propagate.pop())
-                propagate_count += 1
-                rounds=0
-            rounds += 1
-            add_definite()
+        while (len(to_propagate) > 0):
+            propagate(to_propagate.pop())
+        to_visit = get_lowest_possibility()
+        print ("TO:VISIT:", to_visit)
+
+        if to_visit:
+            print('dads',to_visit)
+            square = to_visit
+            print("square:" ,square)
+
+            #WOORKING HERE
+            #If 1 possibility, set it.
+            #if more than 1 possibility, branch and set each
+
+
+        print(to_visit)
+
+        propagate_count += 1
 
 
         if propagate_count >= square_count:
             solved = True
 
-        if not solved:
-            print("BRANCHING")
-            if not contradiction:
-                #find lowest # branches not done, add to list
-                #to_propagate.extend(get_lowest_possibilities(board))
+        #if not solved:
+        #    print("BRANCHING")
+        #    if not contradiction:
+        #        #find lowest # branches not done, add to list
+        #        #to_propagate.extend(get_lowest_possibilities(board))#
 
-                saved_board = deepcopy(board)
-                to_visit = get_lowest_possibilities()
-                for branch in to_visit:
-                    branch_boards.append(
-                        (saved_board,
-                         propagate_count,
-                         deepcopy(branch[0]),
-                        branch[1])
-                    )
+           #     saved_board = deepcopy(board)
+          #      to_visit = get_lowest_possibilities()
+           #     for branch in to_visit:
+           #         branch_boards.append(
+           #             (saved_board,
+           #              propagate_count,
+           #              deepcopy(branch[0]),
+           #             branch[1])
+           #         )
                     #make_branches(board)
                     #save_board(board)
-            if branch_boards:
-                print (branch_boards.pop())
-                board, propagate_count, next_value, value = branch_boards.pop()
-                contradiction = False
+           # if branch_boards:
+           #     print (branch_boards.pop())
+           #     board, propagate_count, next_value, value = branch_boards.pop()
+           #     contradiction = False
 
-                board[next_value.row][next_value.column].set_value(value)
+            #    board[next_value.row][next_value.column].set_value(value)
 
                 #board[next_value.row][next_value.column].set
 
@@ -251,26 +264,25 @@ def main():
         f.write(output_board)
 
 
-def get_lowest_possibilities():
+def get_lowest_possibility():
     low = 1000
-    items = []
+    low_item = None
     for row in board:
         for item in row:
             if item.propagated == False:
                 if len(item.possible_values) < low:
+                    low = len(item.possible_values)
                     print("low values: ", low)
-                    low = item.value
-                    items = [item]
-                elif len(item.possible_values) == low:
-                    print("second value:", low)
-                    items.append(item)
+                    low_item = item
 
-    branches = []
-    for item in items:
-        for val in item.possible_values:
-            branches.append((item, val))
-    print("branches: ", branches)
-    return branches
+    return low_item
+
+    #branches = []
+    #for item in items:
+    #    for val in item.possible_values:
+    #        branches.append({'item:': item, 'value': val})
+    #print("branches: ", branches)
+    #return (branches, low)
 
 if __name__ == "__main__":
     main()
