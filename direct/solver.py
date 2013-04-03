@@ -3,107 +3,177 @@
 # April 1, 20
 
 from __future__ import print_function
+from copy import deepcopy
 import os
 import sys
 import math
 
+# http://magictour.free.fr/top95
+# http://norvig.com/easy50.txt
+
+
 m = 0
 n = 0
-cells = 0
-nvar = 0
 numbers = []
+to_propagate = []
 
 
-def load_board(name):
+class Value():
+    def __init__(self, value):
+        self.possible_values = []
+        self.value = int(value)
+        self.row = 0
+        self.square = 0
+        self.column = 0
+        self.propagated = False
+
+    def __str__(self):
+        return self.value
+
+    def remove_value(self, value):
+        if int(value) in self.possible_values:
+            self.possible_values.remove(int(value))
+        #if not self.propagated and len(self.possible_values) == 1:
+        #    self.set_value(self.possible_values[0])
+        if not self.propagated and len(self.possible_values) == 0:
+            global contradiction
+            contradiction = True
+            print("CONTRADICTION")
+
+    def set_value(self, value):
+        if not self.propagated:
+            print("ADING TO PROPOGATE, value: ", value)
+            self.value = int(value)
+            self.possible_values = [self.value] #added
+            to_propagate.append(self)
+            self.propagated = True
+
+    def setup(self, row, column):
+        self.row = row
+        self.column = column
+        self.square = compute_square(row, column)
+        if self.value > 0:
+            self.possible_values = [self.value]
+            to_propagate.append(self)
+            self.propagated = True
+        else:
+            self.possible_values = numbers[:]
+
+
+def init_board(name):
     """
     Loads a board which is defined by an NxN grid in a file
     The board can be formated 'DDDD' or 'D D D D D'
     The board must be of the size M^2 by M^2
     """
     try:
-        f = open(os.path.normpath('../boards/'+name), 'r')
+        f = open(os.path.normpath('../boards/' + name), 'r')
         data = f.readlines()
 
         # If the board is inputed with spaces between numbers (for general
         # form)
+        board_2d = []
+        formatting = True
         if ' ' in data[0]:
-            print("Format 2")
-            board_2d = [[x for x in line.split(' ')] for line in data]
-        else:
-            print("Format 1")
-            board_2d = [[x for x in line.strip()] for line in data]
+            formatting = False
+
+        for line in data:
+            new_row = []
+
+            if formatting:
+                for x in line.strip():
+                    new_row.append(Value(x))
+            else:
+                for x in line.strip().split(' '):
+                    new_row.append(Value(x))
+
+            board_2d.append(new_row)
+
         f.close()
+
+        global numbers
+        global m
+        global n
+
+        #m = int(math.sqrt(len(board_2d[0])))  # Size of each subsquare
+        n = len(board_2d[0])
+        m = int(math.sqrt(n))
+        print(len(board_2d[0]))
+        #n = pow(m, 2)  # Max number used [1...n]
+        numbers = range(1,n+1)
+
+        print(m)
+        print(n)
+        print(numbers)
+
+        setup_values(board_2d)
+
         return board_2d
     except IOError:
         print("Error opening '%s', check spelling and try again" % name)
         sys.exit(-1)
 
 
-def row(board, x):
-    """Returns all integers of a row"""
-    return [int(board[x][i]) for i in xrange(n)]
-
-
-def col(board, x):
-    """returns all integers of a column"""
-    return [int(board[i][x]) for i in xrange(n)]
-
-
-def square(board, x):
-    """Returns the integer values in a 3x3 square
-    Top left is 0, top right is 2, bottom left is 6 etc"""
-
-    row = int(x/m)*m
-    col = (x % m)*m
-    return [int(board[row+i][col+j]) for i in xrange(m) for j in xrange(m)]
+def setup_values(board):
+    for x in range(n):
+        for y in range(n):
+            board[x][y].setup(x, y)
 
 
 def compute_square(row, column):
     """Computes a squares number"""
 
-    square_number = int(row/m)*m + int(column/m)
+    square_number = int(row / m) * (n/m) + int(column / m)
+    print("s",square_number)
     return square_number
-
-
-def candidates(board, r, c):
-    """Returns all of the possible numbers for a specific cell"""
-
-    if int(board[r][c]) <= 0:
-        return [i for i in numbers
-                if i not in row(board, r)
-                and i not in col(board, c)
-                and i not in square(board, compute_square(r, c))]
-    else:
-        return []
-
-
-def get_candidates(board):
-    """Returned all the candidate numbers for every spot which does not yet have a value"""
-
-    #Merge possible and filtered into 1 call
-    possible = [(candidates(board, x, y), x, y)
-                for x in xrange(n)
-                for y in xrange(n)]
-
-    print(possible)
-
-    filtered = [x for x in possible if len(x[0]) > 0]
-
-    print(filtered)
-
-    sorted_possible = sorted(filtered,
-                             lambda x, y: 1 if len(x[0]) > len(y[0])
-                             else -1 if len(y[0]) > len(x[0])
-                             else 0)
-    return sorted_possible
 
 
 def stringify_board(board):
     """ Turn the board into a string for outputting """
 
+    output = []
     for line in board:
-        line.append('\n')
-    return ''.join(str(item) for line in board for item in line)
+        tmp = []
+        for item in line:
+            tmp.append(str(item.value))
+        tmp.append('\n')
+        output.append(tmp)
+
+    return ''.join(str(item) for line in output for item in line)
+
+
+def propagate(value):
+    remove_rows(value.value, value.row)
+    remove_columns(value.value, value.column)
+    remove_square(value.value, value.square)
+
+    return
+
+
+def remove_rows(value, row):
+    [board[row][col].remove_value(value) for col in xrange(n)]
+    return
+
+
+def remove_columns(value, col):
+    [board[row][col].remove_value(value) for row in xrange(n)]
+    return
+
+
+def remove_square(value, square):
+    row = int(square / m) * m
+    col = (square % m) * m
+    if n <= 2:
+        return
+    [board[row + i][col + j].remove_value(value) for i in range(0,m) for j in range(0,m)]
+    return
+
+def add_definite():
+    for row in board:
+        for item in row:
+            if len(item.possible_values) == 1:
+               item.set_value(item.possible_values[0])
+
 
 
 def main():
@@ -113,34 +183,94 @@ def main():
         sys.exit(-1)
 
     input_board = sys.argv[1]
-    board = load_board(input_board)
 
-    global numbers
-    global m
-    global n
+    global contradiction
+    contradiction = False
 
-    m = int(math.sqrt(len(board[0])))  # Size of each subsquare
-    n = pow(m, 2)  # Max number used [1...n]
-    numbers = range(1, n+1)
+    global board
+    board = init_board(input_board)
 
-    candidate_list = get_candidates(board)
-    while len(candidate_list) > 0:
-        r = candidate_list[0][1]
-        c = candidate_list[0][2]
+    propagate_count = 1
+    square_count = m ** 4
 
-        # Takes first value. Todo: If more than 1 option, save board state and try.
-        # If it fails, go back to last board state
-        # fail if impossible, => No candidates left to try
-        value = candidate_list[0][0][0]
-        board[r][c] = value
-        candidate_list = get_candidates(board)
+    branch_boards = []
+    #To store, all current values, value of each branch
 
+    solved = False
+    while (not contradiction and not solved):
+        rounds = 0
+        while(rounds < 2 ):
+            while (len(to_propagate) > 0):
+                propagate(to_propagate.pop())
+                propagate_count += 1
+                rounds=0
+            rounds += 1
+            add_definite()
+
+
+        if propagate_count >= square_count:
+            solved = True
+
+        if not solved:
+            print("BRANCHING")
+            if not contradiction:
+                #find lowest # branches not done, add to list
+                #to_propagate.extend(get_lowest_possibilities(board))
+
+                saved_board = deepcopy(board)
+                to_visit = get_lowest_possibilities()
+                for branch in to_visit:
+                    branch_boards.append(
+                        (saved_board,
+                         propagate_count,
+                         deepcopy(branch[0]),
+                        branch[1])
+                    )
+                    #make_branches(board)
+                    #save_board(board)
+            if branch_boards:
+                print (branch_boards.pop())
+                board, propagate_count, next_value, value = branch_boards.pop()
+                contradiction = False
+
+                board[next_value.row][next_value.column].set_value(value)
+
+                #board[next_value.row][next_value.column].set
+
+
+
+    if (contradiction):
+        print("UNSATISFIABLE")
+        print("Partially completed board: ")
+    else:
+        print("Completed board: ")
     output_board = stringify_board(board)
 
-    print("Completed board: ")
     print(output_board)
-    with open(os.path.normpath('./output/'+input_board+'.sol'), 'w') as f:
+    with open(os.path.normpath('./output/' + input_board + '.sol'), 'w') as f:
         f.write(output_board)
+
+
+def get_lowest_possibilities():
+    low = 1000
+    items = []
+    for row in board:
+        for item in row:
+            if item.propagated == False:
+                if len(item.possible_values) < low:
+                    print("low values: ", low)
+                    low = item.value
+                    items = [item]
+                elif len(item.possible_values) == low:
+                    print("second value:", low)
+                    items.append(item)
+
+    branches = []
+    for item in items:
+        for val in item.possible_values:
+            branches.append((item, val))
+    print("branches: ", branches)
+    return branches
 
 if __name__ == "__main__":
     main()
