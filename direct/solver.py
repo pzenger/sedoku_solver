@@ -1,4 +1,4 @@
-# Sedoku Direct Solver
+# General Sedoku Direct Solver
 # By Peter Zenger
 # April 1, 20
 
@@ -8,17 +8,18 @@ import os
 import sys
 import math
 
-# http://magictour.free.fr/top95
-# http://norvig.com/easy50.txt
-
-
 m = 0
 n = 0
 numbers = []
-to_propagate = []
 
 
 class Value():
+    """
+    A Value in a square
+    Stores its value, possible values location, 
+    and whether it has been propagted or not
+    """
+
     def __init__(self, value):
         self.possible_values = []
         self.value = int(value)
@@ -28,39 +29,44 @@ class Value():
         self.propagated = False
 
     def __str__(self):
-        return self.value
+        return str([self.row, self.column, self.value, self.propagated])
 
     def remove_value(self, value):
+        """
+        Removes a value from the set of possible_values
+        """
         if int(value) in self.possible_values:
             self.possible_values.remove(int(value))
-        #if not self.propagated and len(self.possible_values) == 1:
-        #    self.set_value(self.possible_values[0])
-        if not self.propagated and len(self.possible_values) == 0:
-            global contradiction
-            contradiction = True
-            print("CONTRADICTION")
+        #if not self.propagated and len(self.possible_values) == 0:
+        #    return False
+        return True
 
     def set_value(self, value=-1):
-        #if not self.propagated:
-            #print("ADING TO PROPOGATE, value: ", value)
+        """
+        Sets the value and flags Value to have been propagated
+        """
         if value == -1:
             self.value = self.possible_values[0]
         else:
             self.value = int(value)
-            self.possible_values = [self.value] #added
-            #to_propagate.append(self)
+            self.possible_values = [self.value]  # added
         self.propagated = True
 
     def setup(self, row, column):
+        """
+        Compute location of this Value
+        Update the possible_values
+        """
         self.row = row
         self.column = column
         self.square = compute_square(row, column)
         if self.value > 0:
             self.possible_values = [self.value]
-            to_propagate.append(self)
             self.propagated = True
+            return True
         else:
             self.possible_values = numbers[:]
+            return False
 
 
 def init_board(name):
@@ -72,9 +78,8 @@ def init_board(name):
     try:
         f = open(os.path.normpath('../boards/' + name), 'r')
         data = f.readlines()
+        f.close()
 
-        # If the board is inputed with spaces between numbers (for general
-        # form)
         board_2d = []
         formatting = True
         if ' ' in data[0]:
@@ -92,42 +97,35 @@ def init_board(name):
 
             board_2d.append(new_row)
 
-        f.close()
-
         global numbers
         global m
         global n
 
-        #m = int(math.sqrt(len(board_2d[0])))  # Size of each subsquare
         n = len(board_2d[0])
         m = int(math.sqrt(n))
-        print(len(board_2d[0]))
-        #n = pow(m, 2)  # Max number used [1...n]
-        numbers = range(1,n+1)
-
-        print(m)
-        print(n)
-        print(numbers)
+        numbers = range(1, n+1)
 
         setup_values(board_2d)
 
         return board_2d
+
     except IOError:
         print("Error opening '%s', check spelling and try again" % name)
         sys.exit(-1)
 
 
 def setup_values(board):
+    """ Add initial values to be propagated """
     for row in range(n):
         for col in range(n):
-            board[row][col].setup(row, col)
+            if board[row][col].setup(row, col):
+                to_visit.append(board[row][col])
 
 
 def compute_square(row, column):
     """Computes a squares number"""
 
     square_number = int(row / m) * (n/m) + int(column / m)
-    print("s",square_number)
     return square_number
 
 
@@ -146,21 +144,20 @@ def stringify_board(board):
 
 
 def propagate(value):
-    remove_rows(value.value, value.row)
-    remove_columns(value.value, value.column)
-    remove_square(value.value, value.square)
+    test = []
+    test += remove_rows(value.value, value.row)
+    test += remove_columns(value.value, value.column)
+    test += remove_square(value.value, value.square)
 
     return
 
 
 def remove_rows(value, row):
-    [board[row][col].remove_value(value) for col in xrange(n)]
-    return
+    return [board[row][col].remove_value(value) for col in xrange(n)]
 
 
 def remove_columns(value, col):
-    [board[row][col].remove_value(value) for row in xrange(n)]
-    return
+    return [board[row][col].remove_value(value) for row in xrange(n)]
 
 
 def remove_square(value, square):
@@ -168,15 +165,23 @@ def remove_square(value, square):
     col = (square % m) * m
     if n <= 2:
         return
-    [board[row + i][col + j].remove_value(value) for i in range(0,m) for j in range(0,m)]
-    return
+    return [board[row + i][col + j].remove_value(value) for i in range(0, m) for j in range(0, m)]
 
-def add_definite():
+
+def get_lowest_possibility():
+    low = 10000
+    low_item = None
     for row in board:
         for item in row:
-            if len(item.possible_values) == 1:
-               item.set_value(item.possible_values[0])
+            if item.propagated == False:
+                if len(item.possible_values) < low:
+                    low = len(item.possible_values)
+                    low_item = item
 
+    if low_item:
+        return [low_item]
+    else:
+        return None
 
 
 def main():
@@ -190,67 +195,57 @@ def main():
     global contradiction
     contradiction = False
 
+    global to_visit
+    to_visit = []
+
     global board
     board = init_board(input_board)
 
-    propagate_count = 1
+    propagate_count = 0
     square_count = m ** 4
 
     branch_boards = []
-    #To store, all current values, value of each branch
 
     solved = False
     while (not contradiction and not solved):
-        while (len(to_propagate) > 0):
-            propagate(to_propagate.pop())
-        to_visit = get_lowest_possibility()
-        print ("TO:VISIT:", to_visit)
-
         if to_visit:
-            print('dads',to_visit)
-            square = to_visit
-            print("square:" ,square)
+            for item in to_visit:
+                if len(item.possible_values) == 0:
+                    contradiction = True
+                elif len(item.possible_values) == 1:
+                    item.set_value()
+                    propagate(item)
+                    propagate_count += 1
+                else:
+                    # If there's more than 1 possibility
+                    # Save all but one as branches, explore the first one
+                    saved_board = deepcopy(board)
 
-            #WOORKING HERE
-            #If 1 possibility, set it.
-            #if more than 1 possibility, branch and set each
+                    for v in item.possible_values[1:]:
+                        branch_boards.append(
+                            (saved_board,
+                             propagate_count,
+                             deepcopy(item),
+                             v)
+                        )
 
+                    item.set_value(item.possible_values[0])
+                    propagate(item)
+                    propagate_count += 1
 
-        print(to_visit)
+        to_visit = get_lowest_possibility()
 
-        propagate_count += 1
-
+        if contradiction:
+            # If there are unexplored branches, explore them
+            if len(branch_boards) > 0:
+                board, propagate_count, next_value, value = branch_boards.pop()
+                board[next_value.row][next_value.column].set_value(value)
+                propagate(board[next_value.row][next_value.column])
+                propagate_count += 1
+                contradiction = False
 
         if propagate_count >= square_count:
             solved = True
-
-        #if not solved:
-        #    print("BRANCHING")
-        #    if not contradiction:
-        #        #find lowest # branches not done, add to list
-        #        #to_propagate.extend(get_lowest_possibilities(board))#
-
-           #     saved_board = deepcopy(board)
-          #      to_visit = get_lowest_possibilities()
-           #     for branch in to_visit:
-           #         branch_boards.append(
-           #             (saved_board,
-           #              propagate_count,
-           #              deepcopy(branch[0]),
-           #             branch[1])
-           #         )
-                    #make_branches(board)
-                    #save_board(board)
-           # if branch_boards:
-           #     print (branch_boards.pop())
-           #     board, propagate_count, next_value, value = branch_boards.pop()
-           #     contradiction = False
-
-            #    board[next_value.row][next_value.column].set_value(value)
-
-                #board[next_value.row][next_value.column].set
-
-
 
     if (contradiction):
         print("UNSATISFIABLE")
@@ -263,26 +258,6 @@ def main():
     with open(os.path.normpath('./output/' + input_board + '.sol'), 'w') as f:
         f.write(output_board)
 
-
-def get_lowest_possibility():
-    low = 1000
-    low_item = None
-    for row in board:
-        for item in row:
-            if item.propagated == False:
-                if len(item.possible_values) < low:
-                    low = len(item.possible_values)
-                    print("low values: ", low)
-                    low_item = item
-
-    return low_item
-
-    #branches = []
-    #for item in items:
-    #    for val in item.possible_values:
-    #        branches.append({'item:': item, 'value': val})
-    #print("branches: ", branches)
-    #return (branches, low)
 
 if __name__ == "__main__":
     main()
