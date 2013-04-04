@@ -220,8 +220,10 @@ def main():
                     # If there's more than 1 possibility
                     # Save all but one as branches, explore the first one
                     saved_board = deepcopy(board)
+                    print("BRANCH")
 
                     for v in item.possible_values[1:]:
+                        print(":", v)
                         branch_boards.append(
                             (saved_board,
                              propagate_count,
