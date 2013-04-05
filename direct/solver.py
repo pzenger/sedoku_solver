@@ -16,7 +16,7 @@ numbers = []
 class Value():
     """
     A Value in a square
-    Stores its value, possible values location, 
+    Stores its value, possible values location,
     and whether it has been propagted or not
     """
 
@@ -27,9 +27,6 @@ class Value():
         self.square = 0
         self.column = 0
         self.propagated = False
-
-    def __str__(self):
-        return str([self.row, self.column, self.value, self.propagated])
 
     def remove_value(self, value):
         """ Removes a value from the set of possible_values """
@@ -45,6 +42,7 @@ class Value():
         else:
             self.value = int(value)
             self.possible_values = [self.value]  # added
+        print("[%d][%d] <- [%d]" % (self.row, self.column, self.value))
         self.propagated = True
 
     def setup(self, row, column):
@@ -134,6 +132,7 @@ def stringify_board(board):
 
 def propagate(value):
     """ Removes possible values from each intersecting square """
+
     remove_rows(value.value, value.row)
     remove_columns(value.value, value.column)
     remove_square(value.value, value.square)
@@ -169,7 +168,6 @@ def get_lowest_possibility():
                     low_item = item
 
     if low_item:
-        print(low_item.column, low_item.row)
         return [low_item]
     else:
         return None
@@ -181,7 +179,6 @@ def main():
         print("Usage: %s [INPUT FILE]" % sys.argv[0])
         sys.exit(-1)
 
-    # Load the path to file
     input_board = sys.argv[1]
 
     global contradiction, to_visit, board
@@ -190,8 +187,8 @@ def main():
 
     board = init_board(input_board)
 
-    propagate_count = 0
-    square_count = m ** 4
+    filled_count = 0
+    total_count = m ** 4
 
     branch_boards = []
 
@@ -204,24 +201,22 @@ def main():
                 elif len(item.possible_values) == 1:
                     item.set_value()
                     propagate(item)
-                    propagate_count += 1
+                    filled_count += 1
                 else:
-                    # If there's more than 1 possibility
-                    # Set one, and save the rest as branches to visit later
-                    #saved_board = deepcopy(board)
 
+                    # Save each branch except the first
                     for v in item.possible_values[1:]:
-                        # Save each branch except the first
                         branch_boards.append(
-                            (deepcopy(board),#saved_board,
-                             propagate_count,
+                            (deepcopy(board),
+                             filled_count,
                              deepcopy(item),
                              v)
                         )
 
+                    # Explore first branch
                     item.set_value(item.possible_values[0])
                     propagate(item)
-                    propagate_count += 1
+                    filled_count += 1
 
         to_visit = get_lowest_possibility()
 
@@ -229,17 +224,14 @@ def main():
             # If there are unexplored branches, explore them
             if len(branch_boards) > 0:
                 print("Loading branch")
-                board, propagate_count, next_value, value = branch_boards.pop()
+                board, filled_count, next_value, value = branch_boards.pop()
                 board[next_value.row][next_value.column].set_value(value)
                 to_visit = [board[next_value.row][next_value.column]]
-                #to_visit.append(board[next_value.row][next_value.column])
-                #propagate(board[next_value.row][next_value.column])
-                #propagate_count += 1
+
                 contradiction = False
 
-
-
-        if propagate_count >= square_count:
+        # If the # of filled squares equals the total squares, the puzzle is solved
+        if filled_count >= total_count:
             solved = True
 
     if (contradiction):
@@ -250,8 +242,6 @@ def main():
     output_board = stringify_board(board)
 
     print(output_board)
-    #with open(os.path.normpath('./output/' + input_board + '.sol'), 'w') as f:
-    #    f.write(output_board)
 
 
 if __name__ == "__main__":
