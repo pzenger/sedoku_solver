@@ -32,19 +32,14 @@ class Value():
         return str([self.row, self.column, self.value, self.propagated])
 
     def remove_value(self, value):
-        """
-        Removes a value from the set of possible_values
-        """
+        """ Removes a value from the set of possible_values """
         if int(value) in self.possible_values:
             self.possible_values.remove(int(value))
-        #if not self.propagated and len(self.possible_values) == 0:
-        #    return False
-        return True
+            return True
+        return False
 
     def set_value(self, value=-1):
-        """
-        Sets the value and flags Value to have been propagated
-        """
+        """ Sets the value and flags Value to have been propagated """
         if value == -1:
             self.value = self.possible_values[0]
         else:
@@ -97,15 +92,17 @@ def init_board(name):
 
             board_2d.append(new_row)
 
-        global numbers
-        global m
-        global n
+        global numbers, m, n
 
-        n = len(board_2d[0])
-        m = int(math.sqrt(n))
-        numbers = range(1, n+1)
+        n = len(board_2d[0])        # Size of each side of the square
+        m = int(math.sqrt(n))       # Size of each subsquare
+        numbers = range(1, n + 1)   # Possible values for a square to have
 
-        setup_values(board_2d)
+        # Setup each square of the board
+        for row in range(n):
+            for col in range(n):
+                if board_2d[row][col].setup(row, col):
+                    to_visit.append(board_2d[row][col])
 
         return board_2d
 
@@ -114,18 +111,10 @@ def init_board(name):
         sys.exit(-1)
 
 
-def setup_values(board):
-    """ Add initial values to be propagated """
-    for row in range(n):
-        for col in range(n):
-            if board[row][col].setup(row, col):
-                to_visit.append(board[row][col])
-
-
 def compute_square(row, column):
-    """Computes a squares number"""
+    """Computes which sub-square number the square resides in"""
 
-    square_number = int(row / m) * (n/m) + int(column / m)
+    square_number = int(row / m) * (n / m) + int(column / m)
     return square_number
 
 
@@ -144,10 +133,10 @@ def stringify_board(board):
 
 
 def propagate(value):
-    test = []
-    test += remove_rows(value.value, value.row)
-    test += remove_columns(value.value, value.column)
-    test += remove_square(value.value, value.square)
+    """ Removes possible values from each intersecting square """
+    remove_rows(value.value, value.row)
+    remove_columns(value.value, value.column)
+    remove_square(value.value, value.square)
 
     return
 
@@ -169,6 +158,7 @@ def remove_square(value, square):
 
 
 def get_lowest_possibility():
+    """ Returns the square that has the least number of possibilities"""
     low = 10000
     low_item = None
     for row in board:
@@ -179,6 +169,7 @@ def get_lowest_possibility():
                     low_item = item
 
     if low_item:
+        print(low_item.column, low_item.row)
         return [low_item]
     else:
         return None
@@ -190,15 +181,13 @@ def main():
         print("Usage: %s [INPUT FILE]" % sys.argv[0])
         sys.exit(-1)
 
+    # Load the path to file
     input_board = sys.argv[1]
 
-    global contradiction
+    global contradiction, to_visit, board
     contradiction = False
+    to_visit = []   # List of nodes to propagate
 
-    global to_visit
-    to_visit = []
-
-    global board
     board = init_board(input_board)
 
     propagate_count = 0
@@ -218,14 +207,13 @@ def main():
                     propagate_count += 1
                 else:
                     # If there's more than 1 possibility
-                    # Save all but one as branches, explore the first one
-                    saved_board = deepcopy(board)
-                    print("BRANCH")
+                    # Set one, and save the rest as branches to visit later
+                    #saved_board = deepcopy(board)
 
                     for v in item.possible_values[1:]:
-                        print(":", v)
+                        # Save each branch except the first
                         branch_boards.append(
-                            (saved_board,
+                            (deepcopy(board),#saved_board,
                              propagate_count,
                              deepcopy(item),
                              v)
@@ -240,11 +228,16 @@ def main():
         if contradiction:
             # If there are unexplored branches, explore them
             if len(branch_boards) > 0:
+                print("Loading branch")
                 board, propagate_count, next_value, value = branch_boards.pop()
                 board[next_value.row][next_value.column].set_value(value)
-                propagate(board[next_value.row][next_value.column])
-                propagate_count += 1
+                to_visit = [board[next_value.row][next_value.column]]
+                #to_visit.append(board[next_value.row][next_value.column])
+                #propagate(board[next_value.row][next_value.column])
+                #propagate_count += 1
                 contradiction = False
+
+
 
         if propagate_count >= square_count:
             solved = True
@@ -257,8 +250,8 @@ def main():
     output_board = stringify_board(board)
 
     print(output_board)
-    with open(os.path.normpath('./output/' + input_board + '.sol'), 'w') as f:
-        f.write(output_board)
+    #with open(os.path.normpath('./output/' + input_board + '.sol'), 'w') as f:
+    #    f.write(output_board)
 
 
 if __name__ == "__main__":
