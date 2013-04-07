@@ -42,7 +42,7 @@ class Value():
         else:
             self.value = int(value)
             self.possible_values = [self.value]  # added
-        print("[%d][%d] <- [%d]" % (self.row, self.column, self.value))
+        #print("[%d][%d] <- [%d]" % (self.row, self.column, self.value))
         self.propagated = True
 
     def setup(self, row, column):
@@ -124,6 +124,7 @@ def stringify_board(board):
         tmp = []
         for item in line:
             tmp.append(str(item.value))
+            tmp.append(' ')
         tmp.append('\n')
         output.append(tmp)
 
@@ -223,8 +224,8 @@ def main():
         if contradiction:
             # If there are unexplored branches, explore them
             if len(branch_boards) > 0:
-                print("Loading branch")
                 board, filled_count, next_value, value = branch_boards.pop()
+                print("Branching: %d unexplored" % len(branch_boards))
                 board[next_value.row][next_value.column].set_value(value)
                 to_visit = [board[next_value.row][next_value.column]]
 

@@ -3,12 +3,13 @@
 # January 25, 2013
 
 from __future__ import print_function
-import sys, math
+import sys, math, os
 
 def load_board(name):
     """Loads a board which is defined by a 9x9 grid in a file"""
     try:
-        f = open(name, 'r')
+        f = open(os.path.normpath('../boards/' + name), 'r')
+       # f = open(name, 'r')
         data = f.readlines()
 
         #If the board is inputed with spaces between numbers (for general form)
@@ -134,19 +135,20 @@ def create_report(clauses, out_filename, nvar):
     header += "\np cnf %d %d\n" % (nvar, nclauses)
     body = stringify_clauses(clauses)
 
-    f = open(out_filename, "ab+")
-    print(header+body, file=f)
-    f.close()
+    with open(os.path.join('./sol/',out_filename),'w') as f:
+        print(header+body, file=f)
     return
 
 def main():
-    if len(sys.argv) < 3 or len(sys.argv) > 3:
+    if len(sys.argv) < 2 or len(sys.argv) > 2:
         print("Peter Zenger's Sedoku 2 SAT program")
-        print("Usage: %s [INPUT FILE] [OUTPUT FILE]" % sys.argv[0])
+        print("Usage: %s [INPUT FILE]" % sys.argv[0])
         sys.exit(-1)
 
     input_board = sys.argv[1]
-    output_filename = sys.argv[2]
+
+    #output_filename = os.path.join('./sol/',input_board)
+    #output_filename = sys.argv[2]
 
     board = load_board(input_board)
     m = int(math.sqrt(len(board[0])))   #Size of each subsquare
@@ -166,8 +168,8 @@ def main():
 
     all_clauses = format_clauses(all_clauses)
 
-    create_report(all_clauses, output_filename, nvar)
-    print("Success!\nOutput saved in %s" % output_filename)
+    create_report(all_clauses, input_board, nvar)
+    #print("Success!\nOutput saved in %s" % output_filename)
  
 if __name__ == "__main__":
     main()
