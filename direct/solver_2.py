@@ -101,6 +101,9 @@ def init_board(name):
             for col in range(n):
                 if board_2d[row][col].setup(row, col):
                     to_visit.append(board_2d[row][col])
+                else:
+                    # Keep track of empty cells
+                    possibility_list.append(board_2d[row][col])
 
         return board_2d
 
@@ -182,9 +185,12 @@ def main():
 
     input_board = sys.argv[1]
 
-    global contradiction, to_visit, board
+    global board, to_visit, possibility_list
     contradiction = False
     to_visit = []   # List of nodes to propagate
+
+
+    possibility_list = []
 
     board = init_board(input_board)
 
@@ -236,13 +242,12 @@ def main():
             solved = True
 
     if (contradiction):
-        print("UNSATISFIABLE")
-        print("Partially completed board: ")
+        print("!!! UNSATISFIABLE !!!")
     else:
         print("Completed board: ")
-    output_board = stringify_board(board)
+        output_board = stringify_board(board)
 
-    print(output_board)
+        print(output_board)
 
 
 if __name__ == "__main__":
