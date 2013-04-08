@@ -1,12 +1,10 @@
 # General Sedoku Direct Solver
 # By Peter Zenger
-# April 7, 20
+# April 1, 20
 
 from __future__ import print_function
 from copy import deepcopy
-import os
-import sys
-import math
+import os, sys, math
 
 m = 0
 n = 0
@@ -23,10 +21,6 @@ class Value():
     def __init__(self, value):
         self.possible_values = []
         self.value = int(value)
-        self.row = 0
-        self.square = 0
-        self.column = 0
-        self.propagated = False
 
     def remove_value(self, value):
         """ Removes a value from the set of possible_values """
@@ -42,8 +36,11 @@ class Value():
         else:
             self.value = int(value)
             self.possible_values = [self.value]  # added
-            #print("[%d][%d] <- [%d]" % (self.row, self.column, self.value))
-        self.propagated = True
+
+        if self in possibility_list:
+            print(len(possibility_list))
+            possibility_list.remove(self)
+            print(len(possibility_list))
 
     def setup(self, row, column):
         """
@@ -55,7 +52,6 @@ class Value():
         self.square = compute_square(row, column)
         if self.value > 0:
             self.possible_values = [self.value]
-            self.propagated = True
             return True
         else:
             self.possible_values = numbers[:]
@@ -101,6 +97,9 @@ def init_board(name):
             for col in range(n):
                 if board_2d[row][col].setup(row, col):
                     to_visit.append(board_2d[row][col])
+                else:
+                    # Keep track of empty cells
+                    possibility_list.append(board_2d[row][col])
 
         return board_2d
 
@@ -133,6 +132,10 @@ def stringify_board(board):
 
 def propagate(value):
     """ Removes possible values from each intersecting square """
+    # Value is object
+
+    #if value in possibility_list:
+    #    possibility_list.remove(value)
 
     remove_rows(value.value, value.row)
     remove_columns(value.value, value.column)
@@ -140,7 +143,7 @@ def propagate(value):
 
     return
 
-
+# Do something to only grab unfilled values
 def remove_rows(value, row):
     return [board[row][col].remove_value(value) for col in xrange(n)]
 
@@ -161,14 +164,21 @@ def get_lowest_possibility():
     """ Returns the square that has the least number of possibilities"""
     low = 10000
     low_item = None
-    for row in board:
+    for item in possibility_list:
+        if len(item.possible_values) < low:
+            low = len(item.possible_values)
+            low_item = item
+    #dafuck
+    """for row in board:
         for item in row:
-            if item.propagated == False:
+            if int(item.value) == 0:
                 if len(item.possible_values) < low:
                     low = len(item.possible_values)
-                    low_item = item
+                    low_item = item"""
 
     if low_item:
+        #possibility_list.remove(low_item)
+        print(low_item.row, low_item.column, low_item.possible_values)
         return [low_item]
     else:
         return None
@@ -182,9 +192,11 @@ def main():
 
     input_board = sys.argv[1]
 
-    global contradiction, to_visit, board
+    global board, to_visit, possibility_list
     contradiction = False
     to_visit = []   # List of nodes to propagate
+
+    possibility_list = []
 
     board = init_board(input_board)
 
@@ -194,7 +206,7 @@ def main():
     branch_boards = []
 
     solved = False
-    while (not contradiction and not solved):
+    while not contradiction and not solved:
         if to_visit:
             for item in to_visit:
                 if len(item.possible_values) == 0:
@@ -209,40 +221,41 @@ def main():
                     for v in item.possible_values[1:]:
                         branch_boards.append(
                             (deepcopy(board),
+                             deepcopy(possibility_list),
                              filled_count,
                              deepcopy(item),
                              v)
                         )
 
                     # Explore first branch
+                    print("brancing")
                     item.set_value(item.possible_values[0])
                     propagate(item)
                     filled_count += 1
 
         to_visit = get_lowest_possibility()
 
-        if contradiction:
+        if contradiction and len(branch_boards) > 0:
             # If there are unexplored branches, explore them
-            if len(branch_boards) > 0:
-                board, filled_count, next_value, value = branch_boards.pop()
-                print("Branching: %d unexplored" % len(branch_boards))
-                board[next_value.row][next_value.column].set_value(value)
-                to_visit = [board[next_value.row][next_value.column]]
+            board, possibility_list, filled_count, next_value, value = branch_boards.pop()
+            print("Branching: %d unexplored" % len(branch_boards))
+            print(filled_count)
+            board[next_value.row][next_value.column].set_value(value)
+            to_visit = [board[next_value.row][next_value.column]]
 
-                contradiction = False
+            contradiction = False
 
         # If the # of filled squares equals the total squares, the puzzle is solved
         if filled_count >= total_count:
             solved = True
 
-    if (contradiction):
-        print("UNSATISFIABLE")
-        print("Partially completed board: ")
+    if contradiction:
+        print("!!! UNSATISFIABLE !!!")
     else:
         print("Completed board: ")
-    output_board = stringify_board(board)
+        output_board = stringify_board(board)
 
-    print(output_board)
+        print(output_board)
 
 
 if __name__ == "__main__":

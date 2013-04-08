@@ -5,11 +5,12 @@
 from __future__ import print_function
 import sys, math, os
 
+
 def load_board(name):
     """Loads a board which is defined by a 9x9 grid in a file"""
     try:
         f = open(os.path.normpath('../boards/' + name), 'r')
-       # f = open(name, 'r')
+        # f = open(name, 'r')
         data = f.readlines()
 
         #If the board is inputed with spaces between numbers (for general form)
@@ -18,7 +19,7 @@ def load_board(name):
             board_2d = [[x for x in line.split(' ')] for line in data]
         else:
             print("Format 1")
-            board_2d = [[x for x in line.strip()] for line in data] 
+            board_2d = [[x for x in line.strip()] for line in data]
         f.close()
         return board_2d
     except IOError:
@@ -33,17 +34,18 @@ def generate_row_pairs(n):
     only appear once in any row."""
     res = []
 
-    for r in xrange(n): #Row
-        for c in xrange(n): #Column
-            for v in xrange(n): #Value
-                for o in range(c+1,n): #Other cell
-                    lhs = (r*n**2)+c*n+v+1
-                    rhs = (r*n**2)+o*n+v+1
+    for r in range(n): #Row
+        for c in range(n): #Column
+            for v in range(n): #Value
+                for o in range(c + 1, n): #Other cell
+                    lhs = (r * n ** 2) + c * n + v + 1
+                    rhs = (r * n ** 2) + o * n + v + 1
 
-                    clause = [lhs*-1, rhs*-1]
+                    clause = [lhs * -1, rhs * -1]
                     res.append(clause)
 
     return res
+
 
 def generate_column_pairs(n):
     """Generates a list of lists, 
@@ -52,16 +54,17 @@ def generate_column_pairs(n):
     only appear once in any column."""
     res = []
 
-    for c in xrange(n): #Column
-        for r in xrange(n): #Row
-            for v in xrange(n): #Value
-                for o in range(r+1, n): #Other cell
-                    lhs = (r*n**2)+c*n+v+1
-                    rhs = o*n**2+c*n+v+1
+    for c in range(n): #Column
+        for r in range(n): #Row
+            for v in range(n): #Value
+                for o in range(r + 1, n): #Other cell
+                    lhs = (r * n ** 2) + c * n + v + 1
+                    rhs = (o * n ** 2) + c * n + v + 1
 
-                    clause = [lhs*-1, rhs*-1]
+                    clause = [lhs * -1, rhs * -1]
                     res.append(clause)
     return res
+
 
 def generate_square_pairs(n):
     """ Generates a list of lists,
@@ -82,13 +85,14 @@ def generate_square_pairs(n):
                                 if oi <= i and oj <= j:
                                     pass
                                 else:
-                                    square_value = (x*n*n*s) + (n*s*k)
-                                    lhs = square_value + (i*n*n) + (j*n) + v + 1
-                                    rhs = square_value + (oi*n*n) + (oj*n) + v + 1
+                                    square_value = (x * n * n * s) + (n * s * k)
+                                    lhs = square_value + (i * n * n) + (j * n) + v + 1
+                                    rhs = square_value + (oi * n * n) + (oj * n) + v + 1
 
-                                    clause = [lhs*-1, rhs*-1]
+                                    clause = [lhs * -1, rhs * -1]
                                     res.append(clause)
     return res
+
 
 def generate_unit_clauses(board):
     """Find the initial unit clauses
@@ -97,21 +101,23 @@ def generate_unit_clauses(board):
     res = []
     n = len(board)
 
-    for i in xrange(n): #Row
-        for j in xrange(n): #Column
-            if board[i][j].isdigit():
+    for i in range(n): #Row
+        for j in range(n): #Column
+            if int(board[i][j]) > 0:
                 v = int(board[i][j])
 
-                clause = [(i*n*n)+(j*n)+v]
+                clause = [(i * n * n) + (j * n) + v]
                 res.append(clause)
     return res
+
 
 def format_clauses(clauses):
     """ Format clauses for desired output
     In this case, add a 0 to the end of each one"""
 
-    fixed_clauses = [x+[0] for x in clauses]
+    fixed_clauses = [x + [0] for x in clauses]
     return fixed_clauses
+
 
 def stringify_clauses(clauses):
     """ Return the clauses 1 per line as a string """
@@ -120,8 +126,10 @@ def stringify_clauses(clauses):
         temp = " ".join([str(clause) for clause in c_list])
         temp += "\n"
         res += temp
+    res = res.rstrip('\n')
 
     return res
+
 
 def create_report(clauses, out_filename, nvar):
     """Generate the output cnf file
@@ -135,9 +143,10 @@ def create_report(clauses, out_filename, nvar):
     header += "\np cnf %d %d\n" % (nvar, nclauses)
     body = stringify_clauses(clauses)
 
-    with open(os.path.join('./sol/',out_filename),'w') as f:
-        print(header+body, file=f)
+    with open(os.path.join('./sol/', out_filename), 'w') as f:
+        print(header + body, file=f)
     return
+
 
 def main():
     if len(sys.argv) < 2 or len(sys.argv) > 2:
@@ -158,7 +167,7 @@ def main():
 
     #List of lists for all holds all the atoms for each cell
     #eg. [[1,2...9],[10,11...18], ... [721,722...729]]
-    ensure_colour_clauses = [[x+(y*n)+1 for x in xrange(n)] for y in xrange(cells)]
+    ensure_colour_clauses = [[x + (y * n) + 1 for x in xrange(n)] for y in xrange(cells)]
     row_clauses = generate_row_pairs(n)
     column_clauses = generate_column_pairs(n)
     square_clauses = generate_square_pairs(n)
@@ -170,7 +179,8 @@ def main():
 
     create_report(all_clauses, input_board, nvar)
     #print("Success!\nOutput saved in %s" % output_filename)
- 
+
+
 if __name__ == "__main__":
     main()
     
