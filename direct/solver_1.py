@@ -164,7 +164,9 @@ if __name__ == "__main__":
 
         if contradiction and len(branch_boards) > 0:
             board, next_row, next_col, value = branch_boards.pop()
-            print("Branching: %d unexplored" % len(branch_boards))
+
+            #print("Branching: %d unexplored" % len(branch_boards))
+
             board[next_row][next_col] = value
 
             contradiction = False

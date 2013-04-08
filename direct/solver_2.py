@@ -216,7 +216,9 @@ def main():
         if contradiction and len(branch_boards) > 0:
             # If there are unexplored branches, explore them
             board, filled_count, next_value, value = branch_boards.pop()
-            print("Branching: %d unexplored" % len(branch_boards))
+
+           # print("Branching: %d unexplored" % len(branch_boards))
+
             board[next_value.row][next_value.column].set_value(value)
             to_visit = [board[next_value.row][next_value.column]]
 
@@ -236,4 +238,8 @@ def main():
 
 
 if __name__ == "__main__":
+    import time
+    time1 = time.time()
     main()
+    time2 = time.time()
+    print(time2 - time1)

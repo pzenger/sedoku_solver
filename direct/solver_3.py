@@ -37,10 +37,8 @@ class Value():
             self.value = int(value)
             self.possible_values = [self.value]  # added
 
-        if self in possibility_list:
-            print(len(possibility_list))
-            possibility_list.remove(self)
-            print(len(possibility_list))
+        if (self.row, self.column) in possibility_list:
+            possibility_list.remove((self.row, self.column))
 
     def setup(self, row, column):
         """
@@ -97,10 +95,7 @@ def init_board(name):
             for col in range(n):
                 if board_2d[row][col].setup(row, col):
                     to_visit.append(board_2d[row][col])
-                else:
-                    # Keep track of empty cells
-                    possibility_list.append(board_2d[row][col])
-
+                possibility_list.append((row, col))
         return board_2d
 
     except IOError:
@@ -134,9 +129,6 @@ def propagate(value):
     """ Removes possible values from each intersecting square """
     # Value is object
 
-    #if value in possibility_list:
-    #    possibility_list.remove(value)
-
     remove_rows(value.value, value.row)
     remove_columns(value.value, value.column)
     remove_square(value.value, value.square)
@@ -164,21 +156,13 @@ def get_lowest_possibility():
     """ Returns the square that has the least number of possibilities"""
     low = 10000
     low_item = None
-    for item in possibility_list:
-        if len(item.possible_values) < low:
-            low = len(item.possible_values)
-            low_item = item
-    #dafuck
-    """for row in board:
-        for item in row:
-            if int(item.value) == 0:
-                if len(item.possible_values) < low:
-                    low = len(item.possible_values)
-                    low_item = item"""
+    for r, c in possibility_list:
+        if len(board[r][c].possible_values) < low:
+            low = len(board[r][c].possible_values)
+            low_item = board[r][c]
 
     if low_item:
         #possibility_list.remove(low_item)
-        print(low_item.row, low_item.column, low_item.possible_values)
         return [low_item]
     else:
         return None
@@ -200,9 +184,6 @@ def main():
 
     board = init_board(input_board)
 
-    filled_count = 0
-    total_count = m ** 4
-
     branch_boards = []
 
     solved = False
@@ -214,39 +195,37 @@ def main():
                 elif len(item.possible_values) == 1:
                     item.set_value()
                     propagate(item)
-                    filled_count += 1
                 else:
 
                     # Save each branch except the first
                     for v in item.possible_values[1:]:
+                        # Deepcopying both is diverging board and possibility_list values
                         branch_boards.append(
                             (deepcopy(board),
-                             deepcopy(possibility_list),
-                             filled_count,
+                             possibility_list[:],
                              deepcopy(item),
                              v)
                         )
 
                     # Explore first branch
-                    print("brancing")
                     item.set_value(item.possible_values[0])
                     propagate(item)
-                    filled_count += 1
 
         to_visit = get_lowest_possibility()
 
         if contradiction and len(branch_boards) > 0:
             # If there are unexplored branches, explore them
-            board, possibility_list, filled_count, next_value, value = branch_boards.pop()
-            print("Branching: %d unexplored" % len(branch_boards))
-            print(filled_count)
+            board, possibility_list, next_value, value = branch_boards.pop()
+
+            #print("Branching: %d unexplored" % len(branch_boards))
+
             board[next_value.row][next_value.column].set_value(value)
             to_visit = [board[next_value.row][next_value.column]]
 
             contradiction = False
 
         # If the # of filled squares equals the total squares, the puzzle is solved
-        if filled_count >= total_count:
+        if len(possibility_list) == 0:#filled_count >= total_count:
             solved = True
 
     if contradiction:
@@ -259,4 +238,9 @@ def main():
 
 
 if __name__ == "__main__":
+    import time
+
+    time1 = time.time()
     main()
+    time2 = time.time()
+    print(time2 - time1)
