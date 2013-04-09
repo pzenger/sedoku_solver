@@ -131,7 +131,7 @@ def stringify_clauses(clauses):
     return res
 
 
-def create_report(clauses, out_filename, nvar):
+def create_report(clauses, nvar,  out_filename):
     """Generate the output cnf file
     Begins with comments that begin with c
     then 'p cnf' to indicate these are cnf formulas
@@ -145,7 +145,17 @@ def create_report(clauses, out_filename, nvar):
 
     with open(os.path.join('./sol/', out_filename), 'w') as f:
         print(header + body, file=f)
-    return
+
+    return header + body
+
+def call_sat_solver(sol_name):
+    sol_name = os.path.join('./sol', sol_name)
+    sol = os.system('java -jar org.sat4j.core.jar %s' % sol_name)
+    if sol == 10:
+        print('SATISFIABLE')
+    else:
+        print('UNSATISFIABLE')
+    #print(sol)
 
 
 def main():
@@ -177,7 +187,11 @@ def main():
 
     all_clauses = format_clauses(all_clauses)
 
-    create_report(all_clauses, input_board, nvar)
+    create_report(all_clauses, nvar, input_board)
+
+    call_sat_solver(input_board)
+
+
     #print("Success!\nOutput saved in %s" % output_filename)
 
 
