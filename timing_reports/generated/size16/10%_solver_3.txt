@@ -1,0 +1,18 @@
+Running times for solver_3.py on generated/size16/10%
+
+Total = 29.436
+Average time = 5.352
+Longest time = 6.180
+
+--------------------------------------------------
+
+generated\size16\10%\16b10.1.b	:	2.585s
+generated\size16\10%\16b10.4.b	:	2.428s
+generated\size16\10%\16b10.0.b	:	2.543s
+generated\size16\10%\16b10.7.b	:	2.638s
+generated\size16\10%\16b10.3.b	:	2.257s
+generated\size16\10%\16b10.6.b	:	6.180s
+generated\size16\10%\16b10.2.b	:	2.397s
+generated\size16\10%\16b10.9.b	:	2.165s
+generated\size16\10%\16b10.5.b	:	3.742s
+generated\size16\10%\16b10.8.b	:	2.500s

@@ -121,8 +121,7 @@ def stringify_board(board):
 
     return ''.join(str(item) for line in output for item in line)
 
-
-if __name__ == "__main__":
+def main():
     if len(sys.argv) < 2 or len(sys.argv) > 3:
         print("Peter Zenger's Sedoku solver program")
         print("Usage: %s [INPUT FILE]" % sys.argv[0])
@@ -146,7 +145,7 @@ if __name__ == "__main__":
             c = c_list[0][2]
             value = c_list[0][0][0]
             board[r][c] = value
-            c_list = all_candidates(board)
+            #c_list = all_candidates(board)
 
         # Or else create a branch for each possibility
         else:
@@ -160,7 +159,7 @@ if __name__ == "__main__":
 
             # Explore first branch
             board[c_list[0][1]][c_list[0][2]] = c_list[0][0][0]
-            c_list = all_candidates(board)
+            #c_list = all_candidates(board)
 
         if contradiction and len(branch_boards) > 0:
             board, next_row, next_col, value = branch_boards.pop()
@@ -171,9 +170,25 @@ if __name__ == "__main__":
 
             contradiction = False
 
-    output_board = stringify_board(board)
 
-    print("Completed board: ")
-    print(output_board)
+
+    if contradiction:
+        print("UNSATISFIABLE")
+    else:
+        print("Completed board: ")
+        output_board = stringify_board(board)
+        print(output_board)
     #with open(input_board + ".sol", 'w') as f:
     #    f.write(output_board)
+
+
+
+if __name__ == "__main__":
+
+
+    import time
+
+    time1 = time.time()
+    main()
+    time2 = time.time()
+    print(time2 - time1)

@@ -1,0 +1,18 @@
+Running times for sudoku2sat.py on generated/size9/25%
+
+Total = 2.275
+Average time = 0.414
+Longest time = 0.535
+
+--------------------------------------------------
+
+generated\size9\25%\9b25.8.b	:	0.191s
+generated\size9\25%\9b25.3.b	:	0.194s
+generated\size9\25%\9b25.7.b	:	0.191s
+generated\size9\25%\9b25.2.b	:	0.205s
+generated\size9\25%\9b25.6.b	:	0.192s
+generated\size9\25%\9b25.1.b	:	0.191s
+generated\size9\25%\9b25.5.b	:	0.192s
+generated\size9\25%\9b25.0.b	:	0.535s
+generated\size9\25%\9b25.9.b	:	0.192s
+generated\size9\25%\9b25.4.b	:	0.190s

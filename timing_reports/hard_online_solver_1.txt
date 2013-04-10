@@ -1,0 +1,29 @@
+Running times for solver_1.py on hard_online
+
+Total = 947.255
+Average time = 82.370
+
+--------------------------------------------------
+
+hard_online\hard.0.b	:	22.960s
+hard_online\q1.0.b	:	82.820s
+hard_online\q1.1.b	:	101.366s
+hard_online\q1.2.b	:	13.528s
+hard_online\q1.3.b	:	24.039s
+hard_online\se.3.b	:	17.807s
+hard_online\suexrat9.3.b	:	6.533s
+hard_online\q1.4.b	:	97.995s
+hard_online\suexrat9.2.b	:	5.393s
+hard_online\se.2.b	:	80.828s
+hard_online\suexrat9.4.b	:	131.139s
+hard_online\se.4.b	:	23.791s
+hard_online\suexrat.0.b	:	5.178s
+hard_online\suexrat9.1.b	:	49.052s
+hard_online\se.0.b	:	61.849s
+hard_online\suexrat9.0.b	:	5.186s
+hard_online\se.1.b	:	63.930s
+hard_online\suexrat.1.b	:	6.529s
+hard_online\suexrat.2.b	:	49.045s
+hard_online\finnish.b	:	56.101s
+hard_online\suexrat.3.b	:	5.394s
+hard_online\suexrat.4.b	:	36.790s

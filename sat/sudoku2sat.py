@@ -143,19 +143,18 @@ def create_report(clauses, nvar,  out_filename):
     header += "\np cnf %d %d\n" % (nvar, nclauses)
     body = stringify_clauses(clauses)
 
-    with open(os.path.join('./sol/', out_filename), 'w') as f:
+    with open(os.path.join('./sol/', 'tmp'), 'w') as f:
         print(header + body, file=f)
 
     return header + body
 
-def call_sat_solver(sol_name):
-    sol_name = os.path.join('./sol', sol_name)
+def call_sat_solver():
+    sol_name = os.path.join('./sol', 'tmp')
     sol = os.system('java -jar org.sat4j.core.jar %s' % sol_name)
     if sol == 10:
         print('SATISFIABLE')
     else:
         print('UNSATISFIABLE')
-    #print(sol)
 
 
 def main():
@@ -189,10 +188,8 @@ def main():
 
     create_report(all_clauses, nvar, input_board)
 
-    call_sat_solver(input_board)
+    call_sat_solver()
 
-
-    #print("Success!\nOutput saved in %s" % output_filename)
 
 
 if __name__ == "__main__":

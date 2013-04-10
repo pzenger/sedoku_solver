@@ -4,7 +4,7 @@
 
 from __future__ import print_function
 from copy import deepcopy
-import os, sys, math
+import os, sys, math, inspect
 
 m = 0
 n = 0
@@ -99,6 +99,8 @@ def init_board(name):
         return board_2d
 
     except IOError:
+        print(os.path.normpath('../boards/' + name))
+        print(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))))
         print("Error opening '%s', check spelling and try again" % name)
         sys.exit(-1)
 
@@ -231,10 +233,10 @@ def main():
     if contradiction:
         print("!!! UNSATISFIABLE !!!")
     else:
-        print("Completed board: ")
-        output_board = stringify_board(board)
+        print("~~~SUCCESS~~~")
+        #output_board = stringify_board(board)
 
-        print(output_board)
+        #print(output_board)
 
 
 if __name__ == "__main__":
