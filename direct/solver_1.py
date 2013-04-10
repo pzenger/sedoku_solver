@@ -121,6 +121,12 @@ def stringify_board(board):
 
     return ''.join(str(item) for line in output for item in line)
 
+def timeout(start):
+    # Timeout at 15 minutes
+    if time.time() - (15*60) > start:
+        return True
+    return False
+
 def main():
     if len(sys.argv) < 2 or len(sys.argv) > 3:
         print("Peter Zenger's Sedoku solver program")
@@ -133,7 +139,8 @@ def main():
     branch_boards = []
     contradiction = False
 
-    while not contradiction and not solved(board):
+    start_time = time.time()
+    while not contradiction and not solved(board) and not timeout(start_time):
 
         c_list = all_candidates(board)
 
@@ -173,13 +180,14 @@ def main():
 
 
     if contradiction:
-        print("UNSATISFIABLE")
+        print("!!! UNSATISFIABLE !!!")
+    elif timeout(start_time):
+        print("/// TIMEOUT AFTER 15 MINUTES ///")
     else:
-        print("Completed board: ")
-        output_board = stringify_board(board)
-        print(output_board)
-    #with open(input_board + ".sol", 'w') as f:
-    #    f.write(output_board)
+        print("~~~SUCCESS~~~")
+        #output_board = stringify_board(board)
+
+        #print(output_board)
 
 
 

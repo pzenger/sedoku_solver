@@ -170,6 +170,12 @@ def get_lowest_possibility():
         return None
 
 
+def timeout(start):
+    # Timeout at 15 minutes
+    if time.time() - (15*60) > start:
+        return True
+    return False
+
 def main():
     if len(sys.argv) < 2 or len(sys.argv) > 3:
         print("Peter Zenger's Sedoku solver program")
@@ -189,7 +195,8 @@ def main():
     branch_boards = []
 
     solved = False
-    while not contradiction and not solved:
+    start_time = time.time()
+    while not contradiction and not solved and not timeout(start_time):
         if to_visit:
             for item in to_visit:
                 if len(item.possible_values) == 0:
@@ -219,7 +226,7 @@ def main():
             # If there are unexplored branches, explore them
             board, possibility_list, next_value, value = branch_boards.pop()
 
-            #print("Branching: %d unexplored" % len(branch_boards))
+            #print("Branching: %d unexplored %d" % (len(branch_boards), len(possibility_list)))
 
             board[next_value.row][next_value.column].set_value(value)
             to_visit = [board[next_value.row][next_value.column]]
@@ -232,6 +239,8 @@ def main():
 
     if contradiction:
         print("!!! UNSATISFIABLE !!!")
+    elif timeout(start_time):
+        print("/// TIMEOUT AFTER 15 MINUTES ///")
     else:
         print("~~~SUCCESS~~~")
         #output_board = stringify_board(board)

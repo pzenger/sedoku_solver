@@ -165,6 +165,11 @@ def get_lowest_possibility():
     else:
         return None
 
+def timeout(start):
+    # Timeout at 15 minutes
+    if time.time() - (15*60) > start:
+        return True
+    return False
 
 def main():
     if len(sys.argv) < 2 or len(sys.argv) > 3:
@@ -186,7 +191,8 @@ def main():
     branch_boards = []
 
     solved = False
-    while (not contradiction and not solved):
+    start_time = time.time()
+    while not contradiction and not solved and not timeout(start_time):
         if to_visit:
             for item in to_visit:
                 if len(item.possible_values) == 0:
@@ -230,11 +236,13 @@ def main():
 
     if contradiction:
         print("!!! UNSATISFIABLE !!!")
+    elif timeout(start_time):
+        print("/// TIMEOUT AFTER 15 MINUTES ///")
     else:
-        print("Completed board: ")
-        output_board = stringify_board(board)
+        print("~~~SUCCESS~~~")
+        #output_board = stringify_board(board)
 
-        print(output_board)
+        #print(output_board)
 
 
 if __name__ == "__main__":

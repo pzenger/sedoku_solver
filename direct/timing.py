@@ -45,6 +45,7 @@ def main():
 
     start_time = time.clock()
     for board in boards:
+        print("Solving: %s" % board)
         board_start = time.clock()
         os.system('python %s %s' % (test_file, board))
         board_total = time.clock() - board_start
