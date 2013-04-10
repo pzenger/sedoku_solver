@@ -192,8 +192,6 @@ def main():
 
 
 if __name__ == "__main__":
-
-
     import time
 
     time1 = time.time()

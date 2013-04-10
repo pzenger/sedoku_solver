@@ -7,7 +7,7 @@ def get_files(directory, board_family):
 
 def create_report(times, test_file, board_family):
 
-    average = sum(times.values()) / len(times)
+    average = sum([time for test, time in times.iteritems() if test != 'total'])/ len(times)
     max_time = max([time for test, time in times.iteritems() if test != 'total'])
 
     r = ""
