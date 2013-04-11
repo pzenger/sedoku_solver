@@ -1,29 +1,30 @@
 Running times for solver_2.py on hard_online
 
-Total = 37.059
-Average time = 3.223
+Total = 20.669
+Average time = 0.898
+Longest time = 2.809
 
 --------------------------------------------------
 
-hard_online\hard.0.b	:	0.925s
-hard_online\q1.0.b	:	3.440s
-hard_online\q1.1.b	:	4.361s
-hard_online\q1.2.b	:	0.621s
-hard_online\q1.3.b	:	0.911s
-hard_online\se.3.b	:	0.691s
-hard_online\suexrat9.3.b	:	0.336s
-hard_online\q1.4.b	:	3.962s
-hard_online\suexrat9.2.b	:	0.285s
-hard_online\se.2.b	:	2.580s
-hard_online\suexrat9.4.b	:	5.039s
-hard_online\se.4.b	:	1.004s
-hard_online\suexrat.0.b	:	0.286s
-hard_online\suexrat9.1.b	:	2.017s
-hard_online\se.0.b	:	1.939s
-hard_online\suexrat9.0.b	:	0.286s
-hard_online\se.1.b	:	2.183s
-hard_online\suexrat.1.b	:	0.333s
-hard_online\suexrat.2.b	:	2.007s
-hard_online\finnish.b	:	2.239s
-hard_online\suexrat.3.b	:	0.282s
-hard_online\suexrat.4.b	:	1.334s
+hard_online\hard.0.b	:	0.514s
+hard_online\q1.0.b	:	1.901s
+hard_online\q1.1.b	:	2.413s
+hard_online\q1.2.b	:	0.353s
+hard_online\q1.3.b	:	0.504s
+hard_online\se.3.b	:	0.386s
+hard_online\suexrat9.3.b	:	0.192s
+hard_online\q1.4.b	:	2.205s
+hard_online\suexrat9.2.b	:	0.170s
+hard_online\se.2.b	:	1.427s
+hard_online\suexrat9.4.b	:	2.809s
+hard_online\se.4.b	:	0.560s
+hard_online\suexrat.0.b	:	0.166s
+hard_online\suexrat9.1.b	:	1.122s
+hard_online\se.0.b	:	1.071s
+hard_online\suexrat9.0.b	:	0.170s
+hard_online\se.1.b	:	1.209s
+hard_online\suexrat.1.b	:	0.195s
+hard_online\suexrat.2.b	:	1.133s
+hard_online\finnish.b	:	1.244s
+hard_online\suexrat.3.b	:	0.167s
+hard_online\suexrat.4.b	:	0.745s

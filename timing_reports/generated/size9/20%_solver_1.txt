@@ -1,0 +1,58 @@
+Running times for solver_1.py on generated/size9/20%
+
+Total = 917.078
+Average time = 17.981
+Longest time = 900.016
+
+--------------------------------------------------
+
+generated\size9\20%\9b20.34.b	:	0.274s
+generated\size9\20%\9b20.14.b	:	0.240s
+generated\size9\20%\9b20.35.b	:	0.239s
+generated\size9\20%\9b20.15.b	:	0.239s
+generated\size9\20%\9b20.38.b	:	0.261s
+generated\size9\20%\9b20.40.b	:	0.234s
+generated\size9\20%\9b20.16.b	:	0.268s
+generated\size9\20%\9b20.17.b	:	0.467s
+generated\size9\20%\9b20.12.b	:	0.244s
+generated\size9\20%\9b20.39.b	:	2.787s
+generated\size9\20%\9b20.13.b	:	1.546s
+generated\size9\20%\9b20.42.b	:	0.248s
+generated\size9\20%\9b20.47.b	:	0.279s
+generated\size9\20%\9b20.26.b	:	0.265s
+generated\size9\20%\9b20.46.b	:	0.250s
+generated\size9\20%\9b20.36.b	:	0.239s
+generated\size9\20%\9b20.43.b	:	0.245s
+generated\size9\20%\9b20.10.b	:	0.264s
+generated\size9\20%\9b20.11.b	:	0.246s
+generated\size9\20%\9b20.32.b	:	0.235s
+generated\size9\20%\9b20.41.b	:	0.249s
+generated\size9\20%\9b20.33.b	:	0.292s
+generated\size9\20%\9b20.21.b	:	0.274s
+generated\size9\20%\9b20.45.b	:	0.249s
+generated\size9\20%\9b20.20.b	:	0.241s
+generated\size9\20%\9b20.44.b	:	0.241s
+generated\size9\20%\9b20.37.b	:	0.505s
+generated\size9\20%\9b20.6.b	:	0.245s
+generated\size9\20%\9b20.5.b	:	0.251s
+generated\size9\20%\9b20.30.b	:	0.304s
+generated\size9\20%\9b20.1.b	:	0.251s
+generated\size9\20%\9b20.4.b	:	0.250s
+generated\size9\20%\9b20.23.b	:	0.282s
+generated\size9\20%\9b20.0.b	:	0.266s
+generated\size9\20%\9b20.22.b	:	0.252s
+generated\size9\20%\9b20.49.b	:	0.271s
+generated\size9\20%\9b20.48.b	:	0.257s
+generated\size9\20%\9b20.7.b	:	0.301s
+generated\size9\20%\9b20.3.b	:	0.282s
+generated\size9\20%\9b20.2.b	:	0.312s
+generated\size9\20%\9b20.31.b	:	0.248s
+generated\size9\20%\9b20.29.b	:	0.255s
+generated\size9\20%\9b20.28.b	:	0.402s
+generated\size9\20%\9b20.25.b	:	0.246s
+generated\size9\20%\9b20.24.b	:	0.253s
+generated\size9\20%\9b20.18.b	:	900.016s
+generated\size9\20%\9b20.19.b	:	0.237s
+generated\size9\20%\9b20.9.b	:	0.244s
+generated\size9\20%\9b20.8.b	:	0.244s
+generated\size9\20%\9b20.27.b	:	0.259s
