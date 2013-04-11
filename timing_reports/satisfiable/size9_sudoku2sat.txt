@@ -1,0 +1,20 @@
+Running times for sudoku2sat.py on satisfiable/size9
+
+Total = 2.639
+Average time = 0.203
+Longest time = 0.376
+
+--------------------------------------------------
+
+satisfiable\size9\board-9-4-3-direct.b	:	0.198s
+satisfiable\size9\board-9-2-4-direct.b	:	0.195s
+satisfiable\size9\board-9-2-2-direct.b	:	0.197s
+satisfiable\size9\board-9-4-2-direct.b	:	0.230s
+satisfiable\size9\board-9-2-1-direct.b	:	0.197s
+satisfiable\size9\board-9-3-1-direct.b	:	0.197s
+satisfiable\size9\board-9-1-1-direct.b	:	0.376s
+satisfiable\size9\board-9-1-2-direct.b	:	0.221s
+satisfiable\size9\board-9-3-3-direct.b	:	0.198s
+satisfiable\size9\board-9-4-1-direct.b	:	0.201s
+satisfiable\size9\board-9-1-3-direct.b	:	0.229s
+satisfiable\size9\board-9-3-2-direct.b	:	0.195s

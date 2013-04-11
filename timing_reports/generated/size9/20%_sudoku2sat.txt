@@ -1,0 +1,58 @@
+Running times for sudoku2sat.py on generated/size9/20%
+
+Total = 15.026
+Average time = 0.294
+Longest time = 0.353
+
+--------------------------------------------------
+
+generated\size9\20%\9b20.34.b	:	0.223s
+generated\size9\20%\9b20.14.b	:	0.350s
+generated\size9\20%\9b20.35.b	:	0.224s
+generated\size9\20%\9b20.15.b	:	0.345s
+generated\size9\20%\9b20.38.b	:	0.254s
+generated\size9\20%\9b20.40.b	:	0.266s
+generated\size9\20%\9b20.16.b	:	0.346s
+generated\size9\20%\9b20.17.b	:	0.308s
+generated\size9\20%\9b20.12.b	:	0.343s
+generated\size9\20%\9b20.39.b	:	0.293s
+generated\size9\20%\9b20.13.b	:	0.351s
+generated\size9\20%\9b20.42.b	:	0.260s
+generated\size9\20%\9b20.47.b	:	0.345s
+generated\size9\20%\9b20.26.b	:	0.293s
+generated\size9\20%\9b20.46.b	:	0.344s
+generated\size9\20%\9b20.36.b	:	0.259s
+generated\size9\20%\9b20.43.b	:	0.253s
+generated\size9\20%\9b20.10.b	:	0.351s
+generated\size9\20%\9b20.11.b	:	0.346s
+generated\size9\20%\9b20.32.b	:	0.224s
+generated\size9\20%\9b20.41.b	:	0.255s
+generated\size9\20%\9b20.33.b	:	0.223s
+generated\size9\20%\9b20.21.b	:	0.310s
+generated\size9\20%\9b20.45.b	:	0.340s
+generated\size9\20%\9b20.20.b	:	0.343s
+generated\size9\20%\9b20.44.b	:	0.268s
+generated\size9\20%\9b20.37.b	:	0.255s
+generated\size9\20%\9b20.6.b	:	0.353s
+generated\size9\20%\9b20.5.b	:	0.343s
+generated\size9\20%\9b20.30.b	:	0.226s
+generated\size9\20%\9b20.1.b	:	0.343s
+generated\size9\20%\9b20.4.b	:	0.258s
+generated\size9\20%\9b20.23.b	:	0.348s
+generated\size9\20%\9b20.0.b	:	0.353s
+generated\size9\20%\9b20.22.b	:	0.346s
+generated\size9\20%\9b20.49.b	:	0.347s
+generated\size9\20%\9b20.48.b	:	0.346s
+generated\size9\20%\9b20.7.b	:	0.346s
+generated\size9\20%\9b20.3.b	:	0.224s
+generated\size9\20%\9b20.2.b	:	0.348s
+generated\size9\20%\9b20.31.b	:	0.225s
+generated\size9\20%\9b20.29.b	:	0.224s
+generated\size9\20%\9b20.28.b	:	0.222s
+generated\size9\20%\9b20.25.b	:	0.346s
+generated\size9\20%\9b20.24.b	:	0.343s
+generated\size9\20%\9b20.18.b	:	0.344s
+generated\size9\20%\9b20.19.b	:	0.349s
+generated\size9\20%\9b20.9.b	:	0.234s
+generated\size9\20%\9b20.8.b	:	0.348s
+generated\size9\20%\9b20.27.b	:	0.227s

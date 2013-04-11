@@ -1,0 +1,17 @@
+Running times for sudoku2sat.py on satisfiable/size25
+
+Total = 86.003
+Average time = 8.600
+Longest time = 22.695
+
+--------------------------------------------------
+
+satisfiable\size25\board-25-4-1-direct.b	:	8.028s
+satisfiable\size25\board-25-1-3-direct.b	:	7.355s
+satisfiable\size25\board-25-1-2-direct.b	:	8.236s
+satisfiable\size25\board-25-1-1-direct.b	:	22.695s
+satisfiable\size25\board-25-2-1-direct.b	:	7.715s
+satisfiable\size25\board-25-4-2-direct.b	:	7.042s
+satisfiable\size25\board-25-2-2-direct.b	:	8.186s
+satisfiable\size25\board-25-4-3-direct.b	:	7.649s
+satisfiable\size25\board-25-2-3-direct.b	:	9.092s

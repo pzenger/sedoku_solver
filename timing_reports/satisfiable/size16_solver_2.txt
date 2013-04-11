@@ -1,0 +1,17 @@
+Running times for solver_2.py on satisfiable/size16
+
+Total = 913.590
+Average time = 91.359
+Longest time = 901.802
+
+--------------------------------------------------
+
+satisfiable\size16\board-16-1-1-direct.b	:	1.536s
+satisfiable\size16\board-16-2-1-direct.b	:	5.357s
+satisfiable\size16\board-16-4-2-direct.b	:	0.745s
+satisfiable\size16\board-16-2-2-direct.b	:	0.677s
+satisfiable\size16\board-16-4-3-direct.b	:	0.513s
+satisfiable\size16\board-16-2-3-direct.b	:	901.802s
+satisfiable\size16\board-16-4-1-direct.b	:	0.621s
+satisfiable\size16\board-16-1-3-direct.b	:	1.195s
+satisfiable\size16\board-16-1-2-direct.b	:	1.142s

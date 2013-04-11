@@ -1,0 +1,20 @@
+Running times for solver_3.py on satisfiable/size9
+
+Total = 0.861
+Average time = 0.066
+Longest time = 0.114
+
+--------------------------------------------------
+
+satisfiable\size9\board-9-4-3-direct.b	:	0.063s
+satisfiable\size9\board-9-2-4-direct.b	:	0.054s
+satisfiable\size9\board-9-2-2-direct.b	:	0.051s
+satisfiable\size9\board-9-4-2-direct.b	:	0.066s
+satisfiable\size9\board-9-2-1-direct.b	:	0.056s
+satisfiable\size9\board-9-3-1-direct.b	:	0.051s
+satisfiable\size9\board-9-1-1-direct.b	:	0.114s
+satisfiable\size9\board-9-1-2-direct.b	:	0.111s
+satisfiable\size9\board-9-3-3-direct.b	:	0.054s
+satisfiable\size9\board-9-4-1-direct.b	:	0.061s
+satisfiable\size9\board-9-1-3-direct.b	:	0.110s
+satisfiable\size9\board-9-3-2-direct.b	:	0.065s

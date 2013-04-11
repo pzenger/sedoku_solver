@@ -1,0 +1,58 @@
+Running times for sudoku2sat.py on generated/size25/20%
+
+Total = 500.031
+Average time = 9.804
+Longest time = 19.807
+
+--------------------------------------------------
+
+generated\size25\20%\25b20.12.b	:	13.531s
+generated\size25\20%\25b20.29.b	:	7.230s
+generated\size25\20%\25b20.13.b	:	6.951s
+generated\size25\20%\25b20.28.b	:	18.094s
+generated\size25\20%\25b20.3.b	:	12.895s
+generated\size25\20%\25b20.2.b	:	14.346s
+generated\size25\20%\25b20.25.b	:	7.218s
+generated\size25\20%\25b20.24.b	:	7.198s
+generated\size25\20%\25b20.33.b	:	7.732s
+generated\size25\20%\25b20.48.b	:	8.046s
+generated\size25\20%\25b20.9.b	:	13.880s
+generated\size25\20%\25b20.27.b	:	13.744s
+generated\size25\20%\25b20.8.b	:	7.892s
+generated\size25\20%\25b20.26.b	:	14.206s
+generated\size25\20%\25b20.34.b	:	7.056s
+generated\size25\20%\25b20.18.b	:	7.244s
+generated\size25\20%\25b20.35.b	:	8.303s
+generated\size25\20%\25b20.19.b	:	8.408s
+generated\size25\20%\25b20.14.b	:	8.748s
+generated\size25\20%\25b20.39.b	:	8.524s
+generated\size25\20%\25b20.15.b	:	11.133s
+generated\size25\20%\25b20.5.b	:	17.776s
+generated\size25\20%\25b20.21.b	:	7.887s
+generated\size25\20%\25b20.16.b	:	7.134s
+generated\size25\20%\25b20.20.b	:	14.609s
+generated\size25\20%\25b20.7.b	:	13.512s
+generated\size25\20%\25b20.43.b	:	8.496s
+generated\size25\20%\25b20.6.b	:	7.826s
+generated\size25\20%\25b20.42.b	:	8.043s
+generated\size25\20%\25b20.38.b	:	7.564s
+generated\size25\20%\25b20.41.b	:	9.272s
+generated\size25\20%\25b20.32.b	:	7.124s
+generated\size25\20%\25b20.40.b	:	8.231s
+generated\size25\20%\25b20.45.b	:	8.079s
+generated\size25\20%\25b20.1.b	:	7.580s
+generated\size25\20%\25b20.44.b	:	7.084s
+generated\size25\20%\25b20.0.b	:	7.310s
+generated\size25\20%\25b20.17.b	:	19.807s
+generated\size25\20%\25b20.4.b	:	8.612s
+generated\size25\20%\25b20.30.b	:	7.743s
+generated\size25\20%\25b20.31.b	:	8.445s
+generated\size25\20%\25b20.23.b	:	8.324s
+generated\size25\20%\25b20.47.b	:	7.309s
+generated\size25\20%\25b20.22.b	:	8.839s
+generated\size25\20%\25b20.46.b	:	13.867s
+generated\size25\20%\25b20.10.b	:	13.759s
+generated\size25\20%\25b20.11.b	:	9.452s
+generated\size25\20%\25b20.36.b	:	12.884s
+generated\size25\20%\25b20.49.b	:	12.862s
+generated\size25\20%\25b20.37.b	:	8.203s

@@ -1,0 +1,30 @@
+Running times for sudoku2sat.py on hard_online
+
+Total = 8.997
+Average time = 0.391
+Longest time = 0.902
+
+--------------------------------------------------
+
+hard_online\hard.0.b	:	0.351s
+hard_online\q1.0.b	:	0.353s
+hard_online\q1.1.b	:	0.359s
+hard_online\q1.2.b	:	0.359s
+hard_online\q1.3.b	:	0.373s
+hard_online\se.3.b	:	0.370s
+hard_online\suexrat9.3.b	:	0.327s
+hard_online\q1.4.b	:	0.367s
+hard_online\suexrat9.2.b	:	0.293s
+hard_online\se.2.b	:	0.853s
+hard_online\suexrat9.4.b	:	0.290s
+hard_online\se.4.b	:	0.435s
+hard_online\suexrat.0.b	:	0.545s
+hard_online\suexrat9.1.b	:	0.902s
+hard_online\se.0.b	:	0.361s
+hard_online\suexrat9.0.b	:	0.359s
+hard_online\se.1.b	:	0.364s
+hard_online\suexrat.1.b	:	0.533s
+hard_online\suexrat.2.b	:	0.265s
+hard_online\finnish.b	:	0.348s
+hard_online\suexrat.3.b	:	0.293s
+hard_online\suexrat.4.b	:	0.292s
