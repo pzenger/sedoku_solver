@@ -26,21 +26,34 @@ import os
 
 
 # 25 with fastest 2 solvers, only 40% with fastest
-os.system('python timing.py solver_2.py generated/size25/20%')
-os.system('python timing.py solver_3.py generated/size25/20%')
+#os.system('python timing.py solver_2.py generated/size25/20%')
+#os.system('python timing.py solver_3.py generated/size25/20%')
 #os.system('python timing.py solver_3.py generated/size25/40%')
 
 # a 36 with fastest
-os.system('python timing.py solver_3.py generated/size36/20%')
+#os.system('python timing.py solver_3.py generated/size36/20%')
 #os.system('python timing.py solver_3.py generated/size36/40%')
 
 # 16 with slow
-os.system('python timing.py solver_1.py generated/size16/20%')
+#os.system('python timing.py solver_1.py generated/size16/20%')
 #os.system('python timing.py solver_1.py generated/size16/40%')
 
 # Just incase it manages to get this far:
-os.system('python timing.py solver_2.py generated/size36/20%')
+#os.system('python timing.py solver_2.py generated/size36/20%')
 #os.system('python timing.py solver_2.py generated/size36/40%')
+
+
+os.system('python timing.py solver_1.py satisfiable/size9')
+os.system('python timing.py solver_2.py satisfiable/size9')
+os.system('python timing.py solver_3.py satisfiable/size9')
+
+os.system('python timing.py solver_1.py satisfiable/size16')
+os.system('python timing.py solver_2.py satisfiable/size16')
+os.system('python timing.py solver_3.py satisfiable/size16')
+
+os.system('python timing.py solver_2.py satisfiable/size25')
+os.system('python timing.py solver_3.py satisfiable/size25')
+os.system('python timing.py solver_1.py satisfiable/size25')
 
 
 
