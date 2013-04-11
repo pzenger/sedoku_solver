@@ -1,0 +1,58 @@
+Running times for enfragmo.py on generated/size25/40%
+
+Total = 331.153
+Average time = 6.493
+Longest time = 7.204
+
+--------------------------------------------------
+
+generated/size25/40%/25b40.21.I	:	6.587s
+generated/size25/40%/25b40.38.I	:	6.072s
+generated/size25/40%/25b40.5.I	:	6.626s
+generated/size25/40%/25b40.32.I	:	6.810s
+generated/size25/40%/25b40.20.I	:	7.204s
+generated/size25/40%/25b40.26.I	:	6.734s
+generated/size25/40%/25b40.23.I	:	6.707s
+generated/size25/40%/25b40.27.I	:	6.705s
+generated/size25/40%/25b40.9.I	:	6.870s
+generated/size25/40%/25b40.22.I	:	6.651s
+generated/size25/40%/25b40.37.I	:	6.971s
+generated/size25/40%/25b40.41.I	:	6.694s
+generated/size25/40%/25b40.11.I	:	6.088s
+generated/size25/40%/25b40.36.I	:	6.587s
+generated/size25/40%/25b40.40.I	:	6.686s
+generated/size25/40%/25b40.8.I	:	6.055s
+generated/size25/40%/25b40.46.I	:	6.624s
+generated/size25/40%/25b40.47.I	:	6.690s
+generated/size25/40%/25b40.13.I	:	6.659s
+generated/size25/40%/25b40.10.I	:	6.011s
+generated/size25/40%/25b40.18.I	:	6.551s
+generated/size25/40%/25b40.1.I	:	6.252s
+generated/size25/40%/25b40.39.I	:	6.836s
+generated/size25/40%/25b40.48.I	:	6.753s
+generated/size25/40%/25b40.33.I	:	6.613s
+generated/size25/40%/25b40.17.I	:	6.739s
+generated/size25/40%/25b40.19.I	:	7.001s
+generated/size25/40%/25b40.0.I	:	6.749s
+generated/size25/40%/25b40.43.I	:	6.603s
+generated/size25/40%/25b40.35.I	:	6.612s
+generated/size25/40%/25b40.30.I	:	6.650s
+generated/size25/40%/25b40.7.I	:	6.766s
+generated/size25/40%/25b40.34.I	:	6.126s
+generated/size25/40%/25b40.6.I	:	6.598s
+generated/size25/40%/25b40.16.I	:	6.754s
+generated/size25/40%/25b40.42.I	:	6.634s
+generated/size25/40%/25b40.31.I	:	7.043s
+generated/size25/40%/25b40.24.I	:	6.777s
+generated/size25/40%/25b40.44.I	:	6.666s
+generated/size25/40%/25b40.28.I	:	6.785s
+generated/size25/40%/25b40.25.I	:	5.929s
+generated/size25/40%/25b40.45.I	:	6.689s
+generated/size25/40%/25b40.12.I	:	6.631s
+generated/size25/40%/25b40.14.I	:	6.656s
+generated/size25/40%/25b40.3.I	:	6.655s
+generated/size25/40%/25b40.4.I	:	6.726s
+generated/size25/40%/25b40.15.I	:	6.869s
+generated/size25/40%/25b40.29.I	:	5.994s
+generated/size25/40%/25b40.49.I	:	6.684s
+generated/size25/40%/25b40.2.I	:	6.779s

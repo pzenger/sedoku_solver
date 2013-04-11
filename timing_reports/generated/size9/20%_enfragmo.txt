@@ -1,0 +1,58 @@
+Running times for enfragmo.py on generated/size9/20%
+
+Total = 5.216
+Average time = 0.102
+Longest time = 0.108
+
+--------------------------------------------------
+
+generated/size9/20%/9b20.0.I	:	0.103s
+generated/size9/20%/9b20.47.I	:	0.105s
+generated/size9/20%/9b20.1.I	:	0.103s
+generated/size9/20%/9b20.22.I	:	0.103s
+generated/size9/20%/9b20.19.I	:	0.103s
+generated/size9/20%/9b20.23.I	:	0.103s
+generated/size9/20%/9b20.46.I	:	0.104s
+generated/size9/20%/9b20.18.I	:	0.104s
+generated/size9/20%/9b20.40.I	:	0.106s
+generated/size9/20%/9b20.45.I	:	0.104s
+generated/size9/20%/9b20.14.I	:	0.103s
+generated/size9/20%/9b20.41.I	:	0.103s
+generated/size9/20%/9b20.44.I	:	0.104s
+generated/size9/20%/9b20.15.I	:	0.103s
+generated/size9/20%/9b20.13.I	:	0.104s
+generated/size9/20%/9b20.12.I	:	0.103s
+generated/size9/20%/9b20.37.I	:	0.102s
+generated/size9/20%/9b20.27.I	:	0.106s
+generated/size9/20%/9b20.7.I	:	0.102s
+generated/size9/20%/9b20.48.I	:	0.105s
+generated/size9/20%/9b20.35.I	:	0.106s
+generated/size9/20%/9b20.42.I	:	0.106s
+generated/size9/20%/9b20.6.I	:	0.104s
+generated/size9/20%/9b20.20.I	:	0.104s
+generated/size9/20%/9b20.36.I	:	0.104s
+generated/size9/20%/9b20.21.I	:	0.106s
+generated/size9/20%/9b20.5.I	:	0.104s
+generated/size9/20%/9b20.31.I	:	0.104s
+generated/size9/20%/9b20.30.I	:	0.107s
+generated/size9/20%/9b20.4.I	:	0.106s
+generated/size9/20%/9b20.39.I	:	0.106s
+generated/size9/20%/9b20.2.I	:	0.103s
+generated/size9/20%/9b20.38.I	:	0.107s
+generated/size9/20%/9b20.3.I	:	0.106s
+generated/size9/20%/9b20.16.I	:	0.104s
+generated/size9/20%/9b20.28.I	:	0.104s
+generated/size9/20%/9b20.24.I	:	0.106s
+generated/size9/20%/9b20.29.I	:	0.106s
+generated/size9/20%/9b20.49.I	:	0.102s
+generated/size9/20%/9b20.34.I	:	0.108s
+generated/size9/20%/9b20.43.I	:	0.103s
+generated/size9/20%/9b20.17.I	:	0.103s
+generated/size9/20%/9b20.11.I	:	0.103s
+generated/size9/20%/9b20.26.I	:	0.104s
+generated/size9/20%/9b20.10.I	:	0.103s
+generated/size9/20%/9b20.8.I	:	0.102s
+generated/size9/20%/9b20.33.I	:	0.105s
+generated/size9/20%/9b20.25.I	:	0.103s
+generated/size9/20%/9b20.9.I	:	0.103s
+generated/size9/20%/9b20.32.I	:	0.106s

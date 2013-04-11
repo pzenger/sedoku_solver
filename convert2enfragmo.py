@@ -57,12 +57,12 @@ def load_board(directory, board):
 def save_boards(directory, boards):
     # Save the enfragmo boards into an enfragmo directory
 
-    if not os.path.exists(os.path.normpath('%s/enfragmo' % directory)):
-        print('Creating Enfragmo folder')
-        os.makedirs(os.path.normpath('%s/enfragmo' % directory))
+    #if not os.path.exists(os.path.normpath('%s/enfragmo' % directory)):
+    #    print('Creating Enfragmo folder')
+    #    os.makedirs(os.path.normpath('%s/enfragmo' % directory))
 
     for board in boards:
-        with open(os.path.normpath('%s/enfragmo/%s' %(directory, board[1][:-2]+'.I')), 'w') as f:
+        with open(os.path.normpath('%s/%s' %(directory, board[1][:-2]+'.I')), 'w') as f:
             f.write(board[0])
 
 

@@ -1,0 +1,58 @@
+Running times for enfragmo.py on generated/size16/40%
+
+Total = 34.030
+Average time = 0.667
+Longest time = 0.745
+
+--------------------------------------------------
+
+generated/size16/40%/16b40.47.I	:	0.642s
+generated/size16/40%/16b40.0.I	:	0.713s
+generated/size16/40%/16b40.49.I	:	0.726s
+generated/size16/40%/16b40.1.I	:	0.639s
+generated/size16/40%/16b40.19.I	:	0.737s
+generated/size16/40%/16b40.22.I	:	0.636s
+generated/size16/40%/16b40.46.I	:	0.635s
+generated/size16/40%/16b40.18.I	:	0.725s
+generated/size16/40%/16b40.23.I	:	0.640s
+generated/size16/40%/16b40.14.I	:	0.643s
+generated/size16/40%/16b40.40.I	:	0.640s
+generated/size16/40%/16b40.45.I	:	0.643s
+generated/size16/40%/16b40.41.I	:	0.639s
+generated/size16/40%/16b40.15.I	:	0.744s
+generated/size16/40%/16b40.44.I	:	0.710s
+generated/size16/40%/16b40.7.I	:	0.644s
+generated/size16/40%/16b40.13.I	:	0.744s
+generated/size16/40%/16b40.37.I	:	0.657s
+generated/size16/40%/16b40.12.I	:	0.638s
+generated/size16/40%/16b40.27.I	:	0.741s
+generated/size16/40%/16b40.35.I	:	0.643s
+generated/size16/40%/16b40.20.I	:	0.728s
+generated/size16/40%/16b40.36.I	:	0.648s
+generated/size16/40%/16b40.21.I	:	0.716s
+generated/size16/40%/16b40.42.I	:	0.717s
+generated/size16/40%/16b40.5.I	:	0.733s
+generated/size16/40%/16b40.31.I	:	0.731s
+generated/size16/40%/16b40.30.I	:	0.633s
+generated/size16/40%/16b40.2.I	:	0.638s
+generated/size16/40%/16b40.39.I	:	0.724s
+generated/size16/40%/16b40.48.I	:	0.645s
+generated/size16/40%/16b40.3.I	:	0.718s
+generated/size16/40%/16b40.38.I	:	0.634s
+generated/size16/40%/16b40.4.I	:	0.710s
+generated/size16/40%/16b40.43.I	:	0.735s
+generated/size16/40%/16b40.28.I	:	0.647s
+generated/size16/40%/16b40.16.I	:	0.639s
+generated/size16/40%/16b40.24.I	:	0.641s
+generated/size16/40%/16b40.29.I	:	0.652s
+generated/size16/40%/16b40.34.I	:	0.653s
+generated/size16/40%/16b40.17.I	:	0.734s
+generated/size16/40%/16b40.6.I	:	0.745s
+generated/size16/40%/16b40.11.I	:	0.650s
+generated/size16/40%/16b40.10.I	:	0.735s
+generated/size16/40%/16b40.26.I	:	0.634s
+generated/size16/40%/16b40.33.I	:	0.639s
+generated/size16/40%/16b40.25.I	:	0.661s
+generated/size16/40%/16b40.8.I	:	0.652s
+generated/size16/40%/16b40.32.I	:	0.728s
+generated/size16/40%/16b40.9.I	:	0.727s

@@ -3,7 +3,8 @@ import sys, os, time
 
 
 def get_files(directory, board_family):
-    return [os.path.normpath('./%s/%s' % (board_family, f)) for f in os.listdir(directory) if f[-2:] == '.b']
+    print (os.listdir(directory))
+    return [os.path.normpath('./%s/%s' % (board_family, f)) for f in os.listdir(directory) if f[-2:] == '.I']
 
 def create_report(times, test_file, board_family):
 
@@ -43,15 +44,16 @@ def main():
 
     times = {}
 
-    start_time = time.clock()
+    start_time = time.time()
     for board in boards:
         print("Solving: %s" % board)
-        board_start = time.clock()
-        os.system('python %s %s' % (test_file, board))
-        board_total = time.clock() - board_start
+        board_start = time.time()
+        os.system('python %s ../boards/%s' % (test_file, board))
+        board_total = time.time() - board_start
         times[board] = board_total
 
-    total_time = time.clock() - start_time
+    total_time = time.time() - start_time
+    print(total_time)
     times['total'] = total_time
 
     create_report(times, test_file, board_family)

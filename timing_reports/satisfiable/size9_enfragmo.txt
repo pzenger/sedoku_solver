@@ -1,0 +1,20 @@
+Running times for enfragmo.py on satisfiable/size9
+
+Total = 1.207
+Average time = 0.093
+Longest time = 0.109
+
+--------------------------------------------------
+
+satisfiable/size9/board-9-3-3-direct.I	:	0.091s
+satisfiable/size9/board-9-1-2-direct.I	:	0.109s
+satisfiable/size9/board-9-2-1-direct.I	:	0.098s
+satisfiable/size9/board-9-4-2-direct.I	:	0.106s
+satisfiable/size9/board-9-1-1-direct.I	:	0.108s
+satisfiable/size9/board-9-3-1-direct.I	:	0.096s
+satisfiable/size9/board-9-4-3-direct.I	:	0.098s
+satisfiable/size9/board-9-2-2-direct.I	:	0.098s
+satisfiable/size9/board-9-2-4-direct.I	:	0.097s
+satisfiable/size9/board-9-1-3-direct.I	:	0.109s
+satisfiable/size9/board-9-4-1-direct.I	:	0.100s
+satisfiable/size9/board-9-3-2-direct.I	:	0.094s

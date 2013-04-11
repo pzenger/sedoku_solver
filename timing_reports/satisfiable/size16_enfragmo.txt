@@ -1,0 +1,17 @@
+Running times for enfragmo.py on satisfiable/size16
+
+Total = 7.321
+Average time = 0.732
+Longest time = 0.923
+
+--------------------------------------------------
+
+satisfiable/size16/board-16-2-1-direct.I	:	0.784s
+satisfiable/size16/board-16-1-3-direct.I	:	0.901s
+satisfiable/size16/board-16-1-2-direct.I	:	0.901s
+satisfiable/size16/board-16-2-3-direct.I	:	0.797s
+satisfiable/size16/board-16-4-3-direct.I	:	0.724s
+satisfiable/size16/board-16-2-2-direct.I	:	0.799s
+satisfiable/size16/board-16-4-1-direct.I	:	0.757s
+satisfiable/size16/board-16-1-1-direct.I	:	0.923s
+satisfiable/size16/board-16-4-2-direct.I	:	0.734s

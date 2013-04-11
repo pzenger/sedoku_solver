@@ -1,0 +1,30 @@
+Running times for enfragmo.py on hard_online
+
+Total = 2.250
+Average time = 0.098
+Longest time = 0.104
+
+--------------------------------------------------
+
+hard_online/suexrat.4.I	:	0.102s
+hard_online/q1.1.I	:	0.102s
+hard_online/q1.0.I	:	0.101s
+hard_online/suexrat.0.I	:	0.102s
+hard_online/suexrat.1.I	:	0.104s
+hard_online/se.4.I	:	0.101s
+hard_online/suexrat.2.I	:	0.102s
+hard_online/suexrat.3.I	:	0.101s
+hard_online/se.0.I	:	0.102s
+hard_online/suexrat9.4.I	:	0.102s
+hard_online/q1.4.I	:	0.101s
+hard_online/finnish.I	:	0.101s
+hard_online/se.1.I	:	0.103s
+hard_online/se.2.I	:	0.103s
+hard_online/q1.3.I	:	0.104s
+hard_online/q1.2.I	:	0.103s
+hard_online/se.3.I	:	0.102s
+hard_online/hard.0.I	:	0.101s
+hard_online/suexrat9.0.I	:	0.104s
+hard_online/suexrat9.1.I	:	0.102s
+hard_online/suexrat9.2.I	:	0.103s
+hard_online/suexrat9.3.I	:	0.103s
