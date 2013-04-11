@@ -7,7 +7,7 @@ def get_files(directory, board_family):
 
 def create_report(times, test_file, board_family):
 
-    average = sum([time for test, time in times.iteritems() if test != 'total'])/ len(times)
+    average = sum([time for test, time in times.iteritems() if test != 'total']) / len(times)
     max_time = max([time for test, time in times.iteritems() if test != 'total'])
 
     r = ""
@@ -45,6 +45,7 @@ def main():
 
     start_time = time.clock()
     for board in boards:
+        print("Solving: %s" % board)
         board_start = time.clock()
         os.system('python %s %s' % (test_file, board))
         board_total = time.clock() - board_start

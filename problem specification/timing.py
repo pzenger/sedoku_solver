@@ -38,13 +38,14 @@ def main():
 
     test_file = sys.argv[1]
     board_family = sys.argv[2]
-    directory = os.path.normpath('%s' % sys.argv[2])
+    directory = os.path.normpath('../boards/%s' % sys.argv[2])
     boards = get_files(directory, board_family)
 
     times = {}
 
     start_time = time.clock()
     for board in boards:
+        print("Solving: %s" % board)
         board_start = time.clock()
         os.system('python %s %s' % (test_file, board))
         board_total = time.clock() - board_start

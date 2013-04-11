@@ -13,12 +13,10 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
 
-
-
   #config.vm.forward_port 80, 8080
   #config.vm.forward_port 8000, 8000
 
-  config.vm.share_folder "enf", "/home/vagrant/enf", "../enf"
+  config.vm.share_folder "sedoku", "/home/vagrant/sudoku", "../../"
 
   
   config.vm.provision :chef_solo do |chef|

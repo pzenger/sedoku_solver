@@ -4,7 +4,7 @@ import sys, os
 
 
 def main():
-    os.system('./%s S.T %s' % (sys.argv[1], sys.argv[2]))
+    os.system('./Enfragmo S.T %s' % sys.argv[1])
 
 
 if __name__ == "__main__":
